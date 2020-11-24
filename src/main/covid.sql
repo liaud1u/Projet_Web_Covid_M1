@@ -21,8 +21,42 @@ SET time_zone = "+00:00";
 -- Base de données : `covid`
 --
 
+
+
 -- --------------------------------------------------------
 
+--
+-- Structure de la table `utilisateur`
+--
+
+DROP TABLE IF EXISTS `utilisateur`;
+CREATE TABLE IF NOT EXISTS `utilisateur` (
+  `login` varchar(32) NOT NULL,
+  `mdp` varchar(32) NOT NULL,
+  `admin` tinyint(1) NOT NULL,
+  `nom` varchar(32) NOT NULL,
+  `prenom` varchar(32) NOT NULL,
+  `date` date NOT NULL,
+  `photo` blob NOT NULL,
+  PRIMARY KEY (`login`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `lieu`
+--
+
+DROP TABLE IF EXISTS `lieu`;
+CREATE TABLE IF NOT EXISTS `lieu` (
+  `idLieu` int(32) NOT NULL,
+  `nom` varchar(64) NOT NULL,
+  `adresse` varchar(128) NOT NULL,
+  PRIMARY KEY (`idLieu`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+-- --------------------------------------------------------
 --
 -- Structure de la table `activite`
 --
@@ -52,23 +86,11 @@ CREATE TABLE IF NOT EXISTS `ami` (
   PRIMARY KEY (`login1`,`login2`),
   KEY `fk_ami_login1` (`login1`),
   KEY `fk_ami_login2` (`login2`),
-  CONSTRAINT  `fk_ami_login1` FOREIGN KEY (`login1`) REFERENCES  `utilisateur` (`login`)
+  CONSTRAINT  `fk_ami_login1` FOREIGN KEY (`login1`) REFERENCES  `utilisateur` (`login`),
   CONSTRAINT  `fk_ami_login2` FOREIGN KEY (`login2`) REFERENCES  `utilisateur` (`login`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
 
---
--- Structure de la table `lieu`
---
-
-DROP TABLE IF EXISTS `lieu`;
-CREATE TABLE IF NOT EXISTS `lieu` (
-  `idLieu` int(32) NOT NULL,
-  `nom` varchar(64) NOT NULL,
-  `adresse` varchar(128) NOT NULL,
-  PRIMARY KEY (`idLieu`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -87,28 +109,11 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `login2` varchar(32) NOT NULL,
   PRIMARY KEY (`idNotif`),
   KEY `fk_notification_login1` (`login1`),
-  KEY `fk_notification_login2` (`login2`)
-  CONSTRAINT  `fk_ami_login1` FOREIGN KEY (`login1`) REFERENCES  `utilisateur` (`login`)
+  KEY `fk_notification_login2` (`login2`),
+  CONSTRAINT  `fk_ami_login1` FOREIGN KEY (`login1`) REFERENCES  `utilisateur` (`login`),
   CONSTRAINT  `fk_ami_login2` FOREIGN KEY (`login2`) REFERENCES  `utilisateur` (`login`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `utilisateur`
---
-
-DROP TABLE IF EXISTS `utilisateur`;
-CREATE TABLE IF NOT EXISTS `utilisateur` (
-  `login` varchar(32) NOT NULL,
-  `mdp` varchar(32) NOT NULL,
-  `admin` tinyint(1) NOT NULL,
-  `nom` varchar(32) NOT NULL,
-  `prenom` varchar(32) NOT NULL,
-  `date` date NOT NULL,
-  `photo` blob NOT NULL,
-  PRIMARY KEY (`login`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
