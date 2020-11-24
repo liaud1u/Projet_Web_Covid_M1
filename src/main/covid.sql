@@ -35,7 +35,8 @@ CREATE TABLE IF NOT EXISTS `activite` (
   `login` varchar(32) NOT NULL,
   `idLieu` int(32) NOT NULL,
   PRIMARY KEY (`idActivite`),
-  KEY `fk_activite_lieu` (`idLieu`)
+  KEY `fk_activite_lieu` (`idLieu`),
+  CONSTRAINT  `fk_activite_lieu` FOREIGN KEY (`idLieu`) REFERENCES  `lieu` (`idLieu`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -49,7 +50,10 @@ CREATE TABLE IF NOT EXISTS `ami` (
   `login1` varchar(32) NOT NULL,
   `login2` varchar(32) NOT NULL,
   PRIMARY KEY (`login1`,`login2`),
-  KEY `fk_ami_login2` (`login2`)
+  KEY `fk_ami_login1` (`login1`),
+  KEY `fk_ami_login2` (`login2`),
+  CONSTRAINT  `fk_ami_login1` FOREIGN KEY (`login1`) REFERENCES  `utilisateur` (`login`)
+  CONSTRAINT  `fk_ami_login2` FOREIGN KEY (`login2`) REFERENCES  `utilisateur` (`login`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -84,6 +88,8 @@ CREATE TABLE IF NOT EXISTS `notification` (
   PRIMARY KEY (`idNotif`),
   KEY `fk_notification_login1` (`login1`),
   KEY `fk_notification_login2` (`login2`)
+  CONSTRAINT  `fk_ami_login1` FOREIGN KEY (`login1`) REFERENCES  `utilisateur` (`login`)
+  CONSTRAINT  `fk_ami_login2` FOREIGN KEY (`login2`) REFERENCES  `utilisateur` (`login`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
