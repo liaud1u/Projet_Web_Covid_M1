@@ -9,4 +9,14 @@
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 
+    <servlet>
+        <servlet-name>TestDB</servlet-name>
+        <servlet-class>TestBdd</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TestDB</servlet-name>
+        <url-pattern>/TestBdd</url-pattern>
+    </servlet-mapping>
+
 </web-app>
