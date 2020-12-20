@@ -85,11 +85,11 @@
 
             <div class="wow fadeInUp col-md-5 col-sm-5" data-wow-delay="1s">
                 <form action="#" method="post">
-                    <input name="login" type="text" class="form-control" id="login" placeholder="Login">
-                    <input name="password" type="password" class="form-control" id="password" placeholder="Password">
-                    <input name="name" type="text" class="form-control" id="name" placeholder="Name">
-                    <input name="firstname" type="text" class="form-control" id="firstname" placeholder="First Name">
-                    <input name="birthdate" type="date" class="form-control" id="birthdate" placeholder="02/04/97">
+                    <input name="login" type="text" class="form-control" id="login" placeholder="Login" required>
+                    <input name="password" type="password" class="form-control" id="password" placeholder="Password" required>
+                    <input name="name" type="text" class="form-control" id="name" placeholder="Name" required>
+                    <input name="firstname" type="text" class="form-control" id="firstname" placeholder="First Name" required>
+                    <input name="birthdate" type="date" class="form-control" id="birthdate" placeholder="02/04/1997" required>
                     <div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
                         <input name="submit" type="submit" class="form-control" id="submit" value="Inscription">
                     </div>
@@ -132,12 +132,14 @@
      SCRIPTS
 ============================== -->
 <script src="js/jquery.js"></script>
+<script src="js/jsForPage/inscription.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.parallax.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/smoothscroll.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/custom.js"></script>
+
 
 
 </body>
