@@ -13,11 +13,23 @@
         <error-code>404</error-code>
         <location>/not-found-page.html</location>
     </error-page>
+    
+    <servlet>
+        <servlet-name>InscriptionServlet</servlet-name>
+        <servlet-class>servlet.InscriptionServlet</servlet-class>
+    </servlet>
 
     <servlet>
         <servlet-name>TestDB</servlet-name>
         <servlet-class>TestBdd</servlet-class>
     </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>InscriptionServlet</servlet-name>
+        <url-pattern>/Inscription</url-pattern>
+
+
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>TestDB</servlet-name>
