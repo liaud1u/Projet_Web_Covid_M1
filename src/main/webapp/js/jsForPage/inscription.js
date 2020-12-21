@@ -124,9 +124,13 @@ function inscription() {
 
 
 
+$( function() {
+    $( "#birthdate" ).datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
 
-
-
+} );
 
 $(document).ready(function () {
     init();
