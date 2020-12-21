@@ -1,6 +1,8 @@
 package SQLPackage;
 
 
+import bean.User;
+
 import java.sql.*;
 
 public class SQLConnector {
@@ -9,10 +11,40 @@ public class SQLConnector {
 
 			public boolean insertUser(String login, String password, String lastname, String firstname, String date) {
 
-				String rqString =  "insert into utilisateur(login, mdp, admin, nom, prenom, date) values('" + login + "', '" +
+				String rqString =  "Insert into utilisateur(login, mdp, admin, nom, prenom, date) values('" + login + "', '" +
 									password + "', 0, '" + lastname + "', '" + firstname + "', '" + date + "');";
 
 				return doUpdate(rqString);
+			}
+
+			public User getUser(String login, String password) {
+				User user = null;
+				String rqString = "Select * from utilisateur where login='"+login+"';";
+				ResultSet res = doRequest(rqString);
+				int i = 0;
+				try {
+					while (res.next()) {
+						if (PasswordHash.validatePassword(password, res.getString("mdp"))) {
+							if (i == 0) {
+								user = new User();
+								user.setLogin(res.getString("login"));
+								user.setPassword(res.getString("mdp"));
+								user.setAdmin(res.getBoolean("admin"));
+								user.setLastname(res.getString("nom"));
+								user.setFirstname(res.getString("prenom"));
+								user.setDate(res.getString("date"));
+							} else {
+								i++;
+								arret("Plus d'un utilisateur ayant le même login ??");
+							}
+						}
+					}
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				return user;
 			}
 
 		 	public  ResultSet doRequest(String sql_string) {

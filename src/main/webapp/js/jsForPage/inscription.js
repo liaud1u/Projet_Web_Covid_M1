@@ -88,7 +88,6 @@ function verifyDate() {
 }
 
 function inscription() {
-
     const login = $("#login").val();
     const password = $("#password").val();
     const firstname = $("#firstname").val();
@@ -96,7 +95,7 @@ function inscription() {
     const birthdate = $("#birthdate").val();
 
     var href = window.location.href
-    console.log(href);
+
 
     $.ajax({
         type: 'POST',

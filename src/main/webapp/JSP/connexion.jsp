@@ -1,4 +1,4 @@
-<%--
+<%@ page import="bean.User" %><%--
   Created by IntelliJ IDEA.
   User: jordan
   Date: 21/12/2020
@@ -72,7 +72,6 @@
     </div>
 </div>
 
-
 <section id="register" class="parallax-section">
     <div class="container">
         <div class="row">
@@ -85,11 +84,11 @@
 
             <div class="wow fadeInUp col-md-5 col-sm-5" data-wow-delay="1s">
                 <form>
-                    <input name="login" type="text" class="form-control" id="login" placeholder="Login" required>
-                    <input name="password" type="password" class="form-control" id="password" placeholder="Password" required>
+                    <input name="login" type="text" class="form-control" id="login" placeholder="Login" value="Test" required>
+                    <input name="password" type="password" class="form-control" id="password" placeholder="Password" value="TestTest1" required>
                 </form>
                 <div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
-                    <input name="submit" type="submit" class="form-control" id="submit" value="Inscription">
+                    <input name="submit" type="submit" class="form-control" id="submit" value="Connexion">
                 </div>
             </div>
 
@@ -129,6 +128,7 @@
      SCRIPTS
 ============================== -->
 <script src="js/jquery.js"></script>
+<script src="js/jsForPage/connexion.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.parallax.js"></script>
 <script src="js/owl.carousel.min.js"></script>

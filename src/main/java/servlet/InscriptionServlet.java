@@ -1,5 +1,6 @@
 package servlet;
 
+import SQLPackage.PasswordHash;
 import SQLPackage.SQLConnector;
 
 import javax.crypto.SecretKeyFactory;
@@ -20,23 +21,25 @@ import java.util.Base64;
 @WebServlet(name = "InscriptionServlet")
 public class InscriptionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("MDR");
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String lastname = request.getParameter("lastname");
         String firstname = request.getParameter("firstname");
         String birthdate = request.getParameter("birthdate");
-
         SQLConnector sqlConnector = new SQLConnector();
-        String passwordHash = passwordHashing(password);
+        try {
+            String passwordHash = PasswordHash.createHash(password);
+            boolean res = sqlConnector.insertUser(login, passwordHash, lastname, firstname, birthdate);
 
-
-        boolean res = sqlConnector.insertUser(login, passwordHash, lastname, firstname, birthdate);
-
-        response.setContentType("text/plain");
-        PrintWriter out=response.getWriter();
-        out.print(res);
-        out.flush();
-        out.close();
+            response.setContentType("text/plain");
+            PrintWriter out = response.getWriter();
+            out.print(res);
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -52,27 +55,4 @@ public class InscriptionServlet extends HttpServlet {
 
     }
 
-    /**
-     * Hachage du mot de passe grâce à la norme PBKDF2
-     * @param password de type String
-     * @return un String correspondant au paramètre haché
-     */
-    private String passwordHashing(String password) {
-        String passwordHash = "";
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[16];
-        random.nextBytes(salt);
-
-        try {
-            KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
-            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            byte[] hash = factory.generateSecret(spec).getEncoded();
-           passwordHash = Base64.getEncoder().encodeToString(hash);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return passwordHash;
-    }
 }
