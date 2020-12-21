@@ -103,8 +103,14 @@ function inscription() {
         url: href,
         data : {login: login, password: password, lastname: lastname, firstname: firstname, birthdate: birthdate},
         timeout: 5000,
-        complete: (response, xhr) => {
-            console.log("Réussi")
+        success: (response) => {
+           if(response==="true") {
+               alert("Inscription réussie");
+               href = href.substr(0, href.indexOf('/Inscription')) + "/Connexion";
+               window.location = href;
+           } else {
+               console.log("Login déjà existant");
+           }
         },
         error: (xhr) => {
             console.log("status = " + xhr.status);

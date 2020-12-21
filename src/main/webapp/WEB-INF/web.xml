@@ -20,6 +20,11 @@
     </servlet>
 
     <servlet>
+        <servlet-name>ConnexionServlet</servlet-name>
+        <servlet-class>servlet.ConnexionServlet</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>TestDB</servlet-name>
         <servlet-class>TestBdd</servlet-class>
     </servlet>
@@ -27,8 +32,11 @@
     <servlet-mapping>
         <servlet-name>InscriptionServlet</servlet-name>
         <url-pattern>/Inscription</url-pattern>
+    </servlet-mapping>
 
-
+    <servlet-mapping>
+        <servlet-name>ConnexionServlet</servlet-name>
+        <url-pattern>/Connexion</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

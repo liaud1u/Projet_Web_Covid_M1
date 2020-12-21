@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -27,18 +28,23 @@ public class InscriptionServlet extends HttpServlet {
 
         SQLConnector sqlConnector = new SQLConnector();
         String passwordHash = passwordHashing(password);
-        System.out.println(passwordHash);
+
 
         boolean res = sqlConnector.insertUser(login, passwordHash, lastname, firstname, birthdate);
-        System.out.println("Resultat de l'insert : " + res);
+
+        response.setContentType("text/plain");
+        PrintWriter out=response.getWriter();
+        out.print(res);
+        out.flush();
+        out.close();
+
+
     }
-    //TODO: Verification des champs dans la partie serveur
-    //TODO: Hashage du mot de passe
-    //TODO: Redirection vers une page connexion si inscription réussie
-    //TODO: Si inscription echec alors indiquer un message d'erreur sur la page.
-    //TODO: Regarder si possible de verifier que le login n'existe déjà pas en ajax
-    //TODO: Formater la date pour que ça rentre dans le format date de SQL
-    //TODO: Gerer l'ajout de photo
+    //TODO: Verification des champs dans la partie serveur (priorité primordiale)
+    //TODO: Si inscription echec alors indiquer un message d'erreur sur la page. (priorité primordiale)
+    //TODO: Regarder si possible de verifier que le login n'existe déjà pas en ajax (priorité faible)
+    //TODO: Formater la date pour que ça rentre dans le format date de SQL (priorité primordiale)
+    //TODO: Gerer l'ajout de photo (priorité faible)
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
