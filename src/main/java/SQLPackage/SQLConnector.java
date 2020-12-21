@@ -7,7 +7,15 @@ public class SQLConnector {
 
 		public SQLConnector() { }
 
-		   public  ResultSet doRequest(String sql_string) {
+			public boolean insertUser(String login, String password, String lastname, String firstname, String date) {
+
+				String rqString =  "insert into utilisateur(login, mdp, admin, nom, prenom, date) values('" + login + "', '" +
+									password + "', 0, '" + lastname + "', '" + firstname + "', '" + date + "');";
+
+				return doUpdate(rqString);
+			}
+
+		 	public  ResultSet doRequest(String sql_string) {
 			   ResultSet results = null;
 			   Connection con = connect();
 			   try {
@@ -18,6 +26,24 @@ public class SQLConnector {
 				}
 
 			   return results;
+		   }
+
+		   public boolean doUpdate(String sql_string) {
+			int results = 0;
+			Connection con = connect();
+			try {
+				Statement stmt = con.createStatement();
+				results = stmt.executeUpdate(sql_string);
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			boolean reusit = false;
+			if (results == 1) {
+				reusit = true;
+			}
+				return reusit;
 		   }
 
 
@@ -35,8 +61,8 @@ public class SQLConnector {
 			   System.out.println("Connexion a la base de données");
 
 			   try {
-			         String DBurl = "jdbc:mysql://localhost/covid";
-			         con = DriverManager.getConnection(DBurl,"root","");
+			         String DBurl = "jdbc:mysql://127.0.01:8889/covid";
+			         con = DriverManager.getConnection(DBurl,"root","root");
 				   System.out.println("connexion réussie");
 			   }
 			   catch (SQLException e) {

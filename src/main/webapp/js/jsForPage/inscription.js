@@ -2,9 +2,10 @@ function init() {
 
     $("#login").on('input', verifyLogin);
     $("#password").on('input', verifyPassword);
-    $("#name").on('input', verifyName);
+    $("#lastname").on('input', verifyName);
     $("#firstname").on('input', verifyName);
     $("#birthdate").on('input', verifyDate);
+    $("#submit").on('click', inscription);
 }
 
 function verifyLogin() {
@@ -86,7 +87,32 @@ function verifyDate() {
 
 }
 
+function inscription() {
 
+    const login = $("#login").val();
+    const password = $("#password").val();
+    const firstname = $("#firstname").val();
+    const lastname = $("#lastname").val();
+    const birthdate = $("#birthdate").val();
+
+    var href = window.location.href
+    console.log(href);
+
+    $.ajax({
+        type: 'POST',
+        url: href,
+        data : {login: login, password: password, lastname: lastname, firstname: firstname, birthdate: birthdate},
+        timeout: 5000,
+        complete: (response, xhr) => {
+            console.log("Réussi")
+        },
+        error: (xhr) => {
+            console.log("status = " + xhr.status);
+            console.log(xhr);
+        }
+    })
+
+}
 
 
 
