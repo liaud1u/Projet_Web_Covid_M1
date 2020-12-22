@@ -9,19 +9,21 @@ function connexion() {
 
 
     var href = window.location.href
-
+    const alertNotif = $('#alert');
     $.ajax({
         type: 'POST',
         url: href,
         data : {login: login, password: password},
         timeout: 5000,
         success: (response) => {
-            console.log(response);
             if (response === "true") {
+                alertNotif.empty();
+                alertNotif.removeClass('alert alert-danger');
                 alert("Connexion réussit");
-                console.log(sessionStorage.getItem("user"));
             } else {
-                console.log("Mot de passe ou login non correct");
+                alertNotif.addClass('alert alert-danger');
+                alertNotif.empty()
+                alertNotif.append("Login ou mot de passe incorrect !");
             }
         },
         error: (xhr) => {

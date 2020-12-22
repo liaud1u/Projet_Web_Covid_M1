@@ -83,6 +83,9 @@
             </div>
 
             <div class="wow fadeInUp col-md-5 col-sm-5" data-wow-delay="1s">
+                <div id="alert">
+
+                </div>
                 <form>
                     <input name="login" type="text" class="form-control" id="login" placeholder="Login" value="Test" required>
                     <input name="password" type="password" class="form-control" id="password" placeholder="Password" value="TestTest1" required>

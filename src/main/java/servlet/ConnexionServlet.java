@@ -22,15 +22,21 @@ public class ConnexionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        SQLConnector sqlConnector = new SQLConnector();
-        User user = sqlConnector.getUser(login, password);
         PrintWriter out = response.getWriter();
 
-        if (!(user == null)) {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-            out.print(true);
+        if (verificationRegex(login, password)) {
+            SQLConnector sqlConnector = new SQLConnector();
+            User user = sqlConnector.getUser(login, password);
 
+            if (!(user == null)) {
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+                out.print(true);
+
+            } else {
+                out.print(false);
+            }
+            
         } else {
             out.print(false);
         }
@@ -44,6 +50,12 @@ public class ConnexionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher("/JSP/connexion.jsp").forward(request, response);
+    }
+
+    private boolean verificationRegex(String login, String password) {
+
+        return login.matches("^(?=.*[A-Za-z0-9]$)[A-Za-z][A-Za-z\\d.-]{3,19}$") &&
+                password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$");
     }
 
 }
