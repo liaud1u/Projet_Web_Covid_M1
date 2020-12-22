@@ -126,7 +126,8 @@ function inscription() {
 $( function() {
     $( "#birthdate" ).datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        dateFormat: 'dd/mm/yy'
     });
 
 } );
