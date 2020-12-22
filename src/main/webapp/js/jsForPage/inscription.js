@@ -108,7 +108,10 @@ function inscription() {
                href = href.substr(0, href.indexOf('/Inscription')) + "/Connexion";
                window.location = href;
            } else {
-               console.log("Login déjà existant");
+               const alert = $('#alert');
+               alert.addClass("alert alert-danger");
+               alert.empty();
+               alert.append("Ce login n'est pas disponible !");
            }
         },
         error: (xhr) => {

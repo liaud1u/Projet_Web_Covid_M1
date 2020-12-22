@@ -45,9 +45,8 @@ public class InscriptionServlet extends HttpServlet {
 
 
     }
-    //TODO: Si inscription echec alors indiquer un message d'erreur sur la page. (priorité primordiale)
     //TODO: Regarder si possible de verifier que le login n'existe déjà pas en ajax (priorité faible)
-    //TODO: Formater la date pour que ça rentre dans le format date de SQL (priorité primordiale)
+    //TODO: Formater la date pour que ça rentre dans le format date de SQL (priorité primordiale) : peut être pas besoin
     //TODO: Gerer l'ajout de photo (priorité faible)
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
