@@ -36,7 +36,7 @@ public class ConnexionServlet extends HttpServlet {
             } else {
                 out.print(false);
             }
-            
+
         } else {
             out.print(false);
         }
@@ -44,8 +44,6 @@ public class ConnexionServlet extends HttpServlet {
         out.flush();
         out.close();
     }
-    //TODO: affichage d'erreur si pas bon identifiant ou mot de passe
-    //TODO: Verification que le login n'est pas vide ou le mot de passe
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
