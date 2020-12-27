@@ -94,7 +94,7 @@
                     <input name="password" type="password" class="form-control" id="password" placeholder="Password" value="TestTest1" required>
                     <input name="lastname" type="text" class="form-control" id="lastname" placeholder="Last Name" value="Test" required>
                     <input name="firstname" type="text" class="form-control" id="firstname" placeholder="First Name" value="Test" required>
-                    <input name="birthdate" type="date" class="form-control" id="birthdate" placeholder="02/04/1997" value="02/04/1997" required>
+                    <input name="birthdate" type="text" class="form-control" id="birthdate" placeholder="02/04/1997" value="02/04/1997" required>
                 </form>
                 <div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
                     <input name="submit" type="submit" class="form-control" id="submit" value="Inscription">
