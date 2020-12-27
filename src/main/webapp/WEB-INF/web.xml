@@ -6,7 +6,7 @@
 
     <display-name>Projet Web Covid</display-name>
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>/index.html</welcome-file>
     </welcome-file-list>
 
     <error-page>
@@ -25,14 +25,25 @@
     </servlet>
 
     <servlet>
+        <servlet-name>FriendServlet</servlet-name>
+        <servlet-class>servlet.FriendServlet</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>TestDB</servlet-name>
         <servlet-class>TestBdd</servlet-class>
     </servlet>
-    
+
     <servlet-mapping>
         <servlet-name>InscriptionServlet</servlet-name>
         <url-pattern>/Inscription</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>FriendServlet</servlet-name>
+        <url-pattern>/Friend</url-pattern>
+    </servlet-mapping>
+
 
     <servlet-mapping>
         <servlet-name>ConnexionServlet</servlet-name>

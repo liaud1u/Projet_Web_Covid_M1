@@ -4,6 +4,7 @@ package SQLPackage;
 import bean.User;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class SQLConnector {
 
@@ -46,6 +47,35 @@ public class SQLConnector {
 
 				return user;
 			}
+
+	public ArrayList<User> getUsers(String login) {
+		ArrayList<User> users = new ArrayList<>();
+		String rqString = "Select * from utilisateur where login like '%"+login+"%';";
+		ResultSet res = doRequest(rqString);
+		int i = 0;
+		try {
+			while (res.next()) {
+					if (i == 0) {
+						User user = new User();
+						user.setLogin(res.getString("login"));
+						user.setAdmin(res.getBoolean("admin"));
+						user.setLastname(res.getString("nom"));
+						user.setFirstname(res.getString("prenom"));
+						user.setDate(res.getString("date"));
+
+						users.add(user);
+					} else {
+						i++;
+						arret("Plus d'un utilisateur ayant le même login ??");
+					}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return users;
+	}
 
 		 	public  ResultSet doRequest(String sql_string) {
 			   ResultSet results = null;
@@ -93,9 +123,9 @@ public class SQLConnector {
 			   System.out.println("Connexion a la base de données");
 
 			   try {
-			         String DBurl = "jdbc:mysql://127.0.01:8889/covid";
-			         con = DriverManager.getConnection(DBurl,"root","root");
-				   System.out.println("connexion réussie");
+			   		String DBurl = "jdbc:mysql://localhost/covid";
+			   		con = DriverManager.getConnection(DBurl,"root","");
+				   	System.out.println("connexion réussie");
 			   }
 			   catch (SQLException e) {
 			         arret("Connection à la base de données impossible");

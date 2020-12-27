@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="bean.User" %>
+<%@ page import="SQLPackage.SQLConnector" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="fr">
 <head>
     <!--
@@ -28,6 +31,18 @@
 <body data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
 
 <!-- =========================
+     PRE LOADER
+============================== -->
+<div class="preloader">
+
+    <div class="sk-rotating-plane"></div>
+
+</div>
+
+
+
+
+<!-- =========================
      NAVIGATION LINKS
 ============================== -->
 <div class="navbar navbar-fixed-top custom-navbar" role="navigation">
@@ -48,9 +63,11 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="./index.html" class="smoothScroll">Intro</a></li>
-                <li><a href="./friend.html" class="smoothScroll">Amis</a></li>
+                <li><a href="friend.jsp" class="smoothScroll">Amis</a></li>
                 <li><a href="./activities.html" class="smoothScroll">Activitées</a></li>
                 <li><a href="./profile.html" class="smoothScroll">Profil</a></li>
+                <li><a href="Inscription" class="smoothScroll">Inscription</a></li>
+                <li><a href="Connexion" class="smoothScroll">Connexion</a></li>
             </ul>
 
         </div>
@@ -58,24 +75,40 @@
     </div>
 </div>
 
+
 <!-- =========================
-    INTRO SECTION
+    SPEAKERS SECTION
 ============================== -->
-<section id="intro" class="parallax-section">
+<section id="speakers" class="parallax-section">
     <div class="container">
         <div class="row">
 
-            <div class="col-md-12 col-sm-12">
-                <h3 class="wow bounceIn" data-wow-delay="0.9s">July 22 - 26 in San Francisco, CA</h3>
-                <h1 class="wow fadeInUp" data-wow-delay="1.6s">Web Design Conference</h1>
-                <a href="#overview" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">LEARN MORE</a>
-                <a href="#register" class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s">REGISTER NOW</a>
+            <div class="col-md-12 col-sm-12 wow bounceIn">
+                <div class="section-title">
+                    <h2>Ajouter des amis</h2>
+                </div>
+            </div>
+        </div>
+
+
+            <div class="flex-container">
+                <% for(User user : (ArrayList<User>)request.getAttribute("users")) {
+                    String login = user.getLogin();%>
+                <div  class="flex-container-item speakers-wrapper">
+                    <img src="images/user/default.png" class="img-responsive" alt="avatar">
+                    <div class="speakers-thumb">
+                        <h3> <%=user.getLogin()%></h3>
+                        <h6> <%=user.getFirstname()%> <%=user.getLastname()%></h6>
+                    </div>
+                </div>
+                <%     }%>
+
+
             </div>
 
-
-        </div>
     </div>
 </section>
+
 
 
 
