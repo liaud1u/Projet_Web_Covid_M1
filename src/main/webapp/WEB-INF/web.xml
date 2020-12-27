@@ -34,6 +34,15 @@
         <servlet-class>TestBdd</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>RechercheMembreServlet</servlet-name>
+        <servlet-class>servlet.RechercheMembre</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RechercheMembreServlet</servlet-name>
+        <url-pattern>/RechercheMembre</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>InscriptionServlet</servlet-name>
         <url-pattern>/Inscription</url-pattern>

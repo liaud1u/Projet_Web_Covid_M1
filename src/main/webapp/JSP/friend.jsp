@@ -90,10 +90,19 @@
             </div>
         </div>
 
+        <div class="row">
+            <h4>Rechercher par:</h4>
+            <div class="row justify-content-center">
+                <input class="barre-recherche" type="search" id="site-search" name="q"
+                       placeholder="Rechercher un membre"
+                       onkeyup="searchUser(document.getElementById('site-search').value);">
 
-            <div class="flex-container">
-                <% for(User user : (ArrayList<User>)request.getAttribute("users")) {
-                    String login = user.getLogin();%>
+            </div>
+        </div>
+
+
+        <div class="flex-container" id="liste">
+                <% for(User user : (ArrayList<User>)request.getAttribute("users")) { %>
                 <div  class="flex-container-item speakers-wrapper">
                     <img src="images/user/default.png" class="img-responsive" alt="avatar">
                     <div class="speakers-thumb">
@@ -151,6 +160,7 @@
 <script src="js/smoothscroll.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/custom.js"></script>
+<script src="js/ajoutAmi.js"></script>
 
 
 </body>
