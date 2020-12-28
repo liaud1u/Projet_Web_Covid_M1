@@ -56,7 +56,6 @@
                 <span class="icon icon-bar"></span>
                 <span class="icon icon-bar"></span>
             </button>
-            <a href="#" class="navbar-brand">New Event</a>
         </div>
 
         <div class="collapse navbar-collapse">

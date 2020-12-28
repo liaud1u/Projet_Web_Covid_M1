@@ -55,7 +55,6 @@
                 <span class="icon icon-bar"></span>
                 <span class="icon icon-bar"></span>
             </button>
-            <a href="#" class="navbar-brand">New Event</a>
         </div>
 
         <div class="collapse navbar-collapse">
@@ -91,7 +90,7 @@
         </div>
 
         <div class="row">
-            <h4>Rechercher par:</h4>
+            <h4>Rechercher un membre (par pseudo):</h4>
             <div class="row justify-content-center">
                 <input class="barre-recherche" type="search" id="site-search" name="q"
                        placeholder="Rechercher un membre"
