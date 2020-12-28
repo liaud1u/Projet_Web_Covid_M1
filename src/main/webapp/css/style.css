@@ -7,10 +7,11 @@ http://www.templatemo.com/tm-486-new-event
 */
 
 body {
-    background: #ffffff;
+    background: #222222;
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 400;
+    /* padding-bottom: 20px; */
 }
 
 
@@ -155,15 +156,16 @@ footer {
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
-    background: none repeat scroll 0 0 #ffffff;
+    background: none repeat scroll 0 0 #222222;
 }
 
 .sk-rotating-plane {
     width: 50px;
     height: 50px;
-    background-color: #222;
     -webkit-animation: sk-rotatePlane 1.2s infinite ease-in-out;
-    animation: sk-rotatePlane 1.2s infinite ease-in-out; }
+    animation: sk-rotatePlane 1.2s infinite ease-in-out;
+    background: #f2545f;
+}
 
 @-webkit-keyframes sk-rotatePlane {
     0% {
@@ -325,6 +327,7 @@ footer {
 -----------------------------------------*/
 #speakers {
     background: url(../images/intro-bg.jpg) 50% 0 repeat-y fixed;
+    color: white;
 }
 
 #speakers h3 {
@@ -333,7 +336,7 @@ footer {
 }
 
 #speakers h6 {
-    color: #666;
+    color: #fff;
     margin-top: 4px;
 }
 
@@ -360,13 +363,13 @@ footer {
 }
 
 #speakers .speakers-wrapper {
-    background: #ffffff;
+    background: #666666;
 }
 
 
 
 /*---------------------------------------
-   Program section              
+   Program section
 -----------------------------------------*/
 #program h4 {
     color: #808080;
@@ -425,7 +428,7 @@ footer {
 
 
 /*---------------------------------------
-    Regsiter section              
+    Regsiter section
 -----------------------------------------*/
 #register {
     background: url('../images/register-bg.jpg') 50% 0 repeat-y fixed;
@@ -466,7 +469,7 @@ footer {
 
 
 /*---------------------------------------
-   Faq section              
+   Faq section
 -----------------------------------------*/
 #faq {
     background: #f9f9f9;
@@ -531,7 +534,7 @@ footer {
 
 
 /*---------------------------------------
-   Venue section              
+   Venue section
 -----------------------------------------*/
 #venue {
     background: url('../images/venue-bg.jpg') 50% 0 repeat-y fixed;
@@ -549,7 +552,7 @@ footer {
 
 
 /*---------------------------------------
-   Sponsors section              
+   Sponsors section
 -----------------------------------------*/
 #sponsors img {
     margin-top: 18px;
@@ -558,7 +561,7 @@ footer {
 
 
 /*---------------------------------------
-   Contact section              
+   Contact section
 -----------------------------------------*/
 #contact {
     background: url('../images/contact-bg.jpg') 50% 0 repeat-y fixed;
@@ -612,10 +615,11 @@ footer {
 
 
 /*---------------------------------------
-   Footer section              
+   Footer section
 -----------------------------------------*/
 footer {
     background-attachment: fixed;
+    background: #222222;
 }
 
 
@@ -644,7 +648,7 @@ footer {
 
 
 /*---------------------------------------
-   Social icon             
+   Social icon
 -----------------------------------------*/
 .social-icon {
     position: relative;
@@ -678,7 +682,7 @@ footer {
 
 
 /*---------------------------------------
-   Responsive styles            
+   Responsive styles
 -----------------------------------------*/
 @media (max-width: 980px) {
 
@@ -764,6 +768,17 @@ Friend section
     text-align: center;
     line-height: 75px;
     font-size: 30px;
-    border: gray;
-    border-style: inset;
+    border: #222222;
+    border-style: solid;
+    width: auto;
+}
+
+.site-search {
+    background: #ffffff;
+    border: solid;
+    border-color: #222222;
+    width: 30%;
+    align-content: center;
+    text-align: center;
+    color: white;
 }

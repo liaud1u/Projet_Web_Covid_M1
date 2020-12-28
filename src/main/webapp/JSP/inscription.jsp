@@ -62,7 +62,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="./index.html" class="smoothScroll">Intro</a></li>
-                <li><a href="friend.jsp" class="smoothScroll">Amis</a></li>
+                <li><a href="Friend" class="smoothScroll">Amis</a></li>
                 <li><a href="./activities.html" class="smoothScroll">Activitées</a></li>
                 <li><a href="./profile.html" class="smoothScroll">Profil</a></li>
                 <li><a href="Inscription" class="smoothScroll">Inscription</a></li>
@@ -80,9 +80,9 @@
         <div class="row">
 
             <div class="wow fadeInUp col-md-7 col-sm-7" data-wow-delay="0.6s">
-                <h2>Inscription ici </h2>
-                <h3>Nunc eu nibh vel augue mollis tincidunt id efficitur tortor. Sed pulvinar est sit amet tellus iaculis hendrerit.</h3>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet. Dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet consectetuer diam nonummy.</p>
+                <h2>Inscription</h2>
+                 <p>F*ckCovid est une application vous permettant de renseigner vos amis, ainsi
+                    que des lieux que vous avez visité, et de notifier toutes les personnes susceptibles d’être contaminées si vous vous déclarez infecté</p>
             </div>
 
             <div class="wow fadeInUp col-md-5 col-sm-5" data-wow-delay="1s">

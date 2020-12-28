@@ -62,7 +62,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="./index.html" class="smoothScroll">Intro</a></li>
-                <li><a href="friend.jsp" class="smoothScroll">Amis</a></li>
+                <li><a href="Friend" class="smoothScroll">Amis</a></li>
                 <li><a href="./activities.html" class="smoothScroll">Activitées</a></li>
                 <li><a href="./profile.html" class="smoothScroll">Profil</a></li>
                 <li><a href="Inscription" class="smoothScroll">Inscription</a></li>
@@ -92,7 +92,7 @@
         <div class="row">
             <h4>Rechercher un membre (par pseudo):</h4>
             <div class="row justify-content-center">
-                <input class="barre-recherche" type="search" id="site-search" name="q"
+                <input class="barre-recherche site-search" type="search" id="site-search" name="q"
                        placeholder="Rechercher un membre"
                        onkeyup="searchUser(document.getElementById('site-search').value);">
 
