@@ -12,6 +12,7 @@ public class User implements Serializable {
     private String firstname;
     private String date;
     private ArrayList<Activitie> activities = new ArrayList<>();
+    private ArrayList<Notification> notifications = new ArrayList<>();
 
     public String getLogin() {
         return login;
@@ -69,6 +70,24 @@ public class User implements Serializable {
         this.activities = activities;
     }
 
+    public ArrayList<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(ArrayList<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
+    public ArrayList<Notification> getNotificationsNonLues() {
+        ArrayList<Notification> nonLues = new ArrayList<>();
+        for(Notification n : notifications){
+            if(!n.isLu()){
+                nonLues.add(n);
+            }
+        }
+        return nonLues;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -79,6 +98,7 @@ public class User implements Serializable {
                 ", firstname='" + firstname + '\'' +
                 ", date='" + date + '\'' +
                 ", activities=" + activities +
+                ", notif=" + notifications +
                 '}';
     }
 }

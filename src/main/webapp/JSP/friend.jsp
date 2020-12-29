@@ -74,7 +74,7 @@
                 <li><a href="./profile.html" class="smoothScroll">Profil</a></li>
                 <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" href="Notifications">
                     <img src="images/notif.png" alt="notification" width="20" height="20">
-                    <span class="badge badge-pill ">3</span>
+                    <span class="badge badge-pill "><%= user1.getNotificationsNonLues().size() %></span>
                 </button>
                 <%   } else { %>
                 <li><a href="Inscription" class="smoothScroll">Inscription</a></li>

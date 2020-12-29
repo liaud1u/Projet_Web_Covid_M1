@@ -3,6 +3,7 @@ package SQLPackage;
 
 import bean.Activitie;
 import bean.Location;
+import bean.Notification;
 import bean.User;
 
 import java.sql.*;
@@ -52,6 +53,22 @@ public class SQLConnector {
 								}
 
 								user.setActivities(activities);
+
+								String rqStringNotif = "Select * from notification where login1='"+login+"';";
+								ResultSet res3 = doRequest(rqStringNotif);
+
+								ArrayList<Notification> notifs = new ArrayList<>();
+
+								try {
+									while (res3.next()) {
+										Notification notif = getNotification(res3.getString("idNotif"));
+										notifs.add(notif);
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+
+								user.setNotifications(notifs);
 
 							} else {
 								i++;
@@ -115,6 +132,28 @@ public class SQLConnector {
 
 			return location;
 		}
+
+	public Notification getNotification(String id){
+		Notification notif = null;
+		String rqString = "Select * from notification where idNotif='"+id+"';";
+		ResultSet res = doRequest(rqString);
+		int i = 0;
+		try {
+			while (res.next()) {
+				if (i == 0) {
+					notif = new Notification(res.getBoolean("repondu"),res.getBoolean("lu"),res.getDate("date"),res.getString("login2"),res.getBoolean("accepte"));
+				} else {
+					i++;
+					arret("Plus d'une notif ayant le même id ??");
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return notif;
+	}
 
 		public ArrayList<User> getUsers(String login) {
 			ArrayList<User> users = new ArrayList<>();
