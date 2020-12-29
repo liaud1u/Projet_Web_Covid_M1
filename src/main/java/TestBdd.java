@@ -50,7 +50,7 @@ public class TestBdd extends HttpServlet {
         }
 
 
-        response.sendRedirect("index.html");
+        response.sendRedirect("/JSP/index.jsp");
     }
 
 }

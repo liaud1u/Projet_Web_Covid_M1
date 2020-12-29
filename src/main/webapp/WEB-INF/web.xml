@@ -6,13 +6,19 @@
 
     <display-name>Projet Web Covid</display-name>
     <welcome-file-list>
-        <welcome-file>/index.html</welcome-file>
+        <welcome-file>/JSP/index.jsp</welcome-file>
     </welcome-file-list>
+
 
     <error-page>
         <error-code>404</error-code>
         <location>/not-found-page.html</location>
     </error-page>
+
+    <servlet>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>servlet.IndexServlet</servlet-class>
+    </servlet>
     
     <servlet>
         <servlet-name>InscriptionServlet</servlet-name>
@@ -44,6 +50,11 @@
         <servlet-name>ActivitesServlet</servlet-name>
         <servlet-class>servlet.ActivitesServlet</servlet-class>
     </servlet>
+
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>ActivitesServlet</servlet-name>

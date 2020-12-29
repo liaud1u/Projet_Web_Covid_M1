@@ -1,4 +1,4 @@
-<%--
+<%@ page import="bean.User" %><%--
   Created by IntelliJ IDEA.
   User: jordan
   Date: 20/12/2020
@@ -33,6 +33,10 @@
 </head>
 <body data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
 
+<%
+    User user = (User) session.getAttribute("user");
+%>
+
 <!-- =========================
      PRE LOADER
 ============================== -->
@@ -61,12 +65,13 @@
         <div class="collapse navbar-collapse">
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="./index.html" class="smoothScroll">Intro</a></li>
+                <li><a href="index" class="smoothScroll">Intro</a></li>
+                <% if (user != null) { %>
                 <li><a href="Friend" class="smoothScroll">Amis</a></li>
-                <li><a href="Activites" class="smoothScroll">Activitées</a></li>
                 <li><a href="./profile.html" class="smoothScroll">Profil</a></li>
+                <%   } else { %>
                 <li><a href="Inscription" class="smoothScroll">Inscription</a></li>
-                <li><a href="Connexion" class="smoothScroll">Connexion</a></li>
+                <% } %>
             </ul>
 
         </div>
