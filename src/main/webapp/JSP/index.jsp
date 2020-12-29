@@ -13,7 +13,7 @@
     New Event
     http://www.templatemo.com/tm-486-new-event
     -->
-    <title>Le Covid c'est pas très sympa</title>
+    <title>StopCovid</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <meta charset="UTF-8">
@@ -27,11 +27,15 @@
     <link rel="stylesheet" href="css/owl.carousel.css">
 
     <!-- Main css -->
+    StopCovid    <!-- Main css -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- Google Font -->
+
+<!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Poppins:400,500,600' rel='stylesheet' type='text/css'>
 
+
+    <link rel="shortcut icon" href="images/favicon.ico"  type="image/x-icon">
 </head>
 <body data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
 
@@ -72,6 +76,10 @@
                 <li><a href="Friend" class="smoothScroll">Amis</a></li>
                 <li><a href="Activites" class="smoothScroll">Activitées</a></li>
                 <li><a href="./profile.html" class="smoothScroll">Profil</a></li>
+                <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" href="Notifications">
+                    <img src="images/notif.png" alt="notification" width="20" height="20">
+                    <span class="badge badge-pill ">3</span>
+                </button>
                 <%   } else { %>
                 <li><a href="Inscription" class="smoothScroll">Inscription</a></li>
                 <li><a href="Connexion" class="smoothScroll">Connexion</a></li>

@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Le Covid c'est pas très sympa</title>
+    <title>StopCovid</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <meta charset="UTF-8">
@@ -23,9 +23,11 @@
     <link rel="stylesheet" href="css/owl.carousel.css">
 
     <!-- Main css -->
+    StopCovid    <!-- Main css -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- Google Font -->
+
+<!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Poppins:400,500,600' rel='stylesheet' type='text/css'>
 
 </head>
@@ -84,7 +86,7 @@
 
             <div class="wow fadeInUp col-md-7 col-sm-7" data-wow-delay="0.6s">
                 <h2>Connexion </h2>
-                <p>F*ckCovid est une application vous permettant de renseigner vos amis, ainsi
+                <p>StopCovid est une application vous permettant de renseigner vos amis, ainsi
                     que des lieux que vous avez visité, et de notifier toutes les personnes susceptibles d’être contaminées si vous vous déclarez infecté</p>
             </div>
 

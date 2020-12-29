@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Le Covid c'est pas très sympa</title>
+    <title>StopCovid</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <meta charset="UTF-8">
@@ -24,7 +24,9 @@
 
 
     <!-- Main css -->
+    StopCovid    <!-- Main css -->
     <link rel="stylesheet" href="css/style.css">
+
 
 
     <!-- Google Font -->
@@ -69,6 +71,10 @@
                 <% if (user != null) { %>
                 <li><a href="Friend" class="smoothScroll">Amis</a></li>
                 <li><a href="./profile.html" class="smoothScroll">Profil</a></li>
+                <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" href="Notifications">
+                    <img src="images/notif.png" alt="notification" width="20" height="20">
+                    <span class="badge badge-pill ">3</span>
+                </button>
                 <%   } else { %>
                 <li><a href="Inscription" class="smoothScroll">Inscription</a></li>
                 <% } %>
@@ -86,7 +92,7 @@
 
             <div class="wow fadeInUp col-md-7 col-sm-7" data-wow-delay="0.6s">
                 <h2>Inscription</h2>
-                <p>F*ckCovid est une application vous permettant de renseigner vos amis, ainsi
+                <p>StopCovid est une application vous permettant de renseigner vos amis, ainsi
                     que des lieux que vous avez visité, et de notifier toutes les personnes susceptibles d’être contaminées si vous vous déclarez infecté</p>
             </div>
 

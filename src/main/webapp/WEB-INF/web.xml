@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <display-name>Projet Web Covid</display-name>
+    <display-name>StopCovid</display-name>
     <welcome-file-list>
         <welcome-file>/JSP/index.jsp</welcome-file>
     </welcome-file-list>
@@ -50,6 +50,18 @@
         <servlet-name>ActivitesServlet</servlet-name>
         <servlet-class>servlet.ActivitesServlet</servlet-class>
     </servlet>
+
+
+
+    <servlet>
+        <servlet-name>NotificationsServlet</servlet-name>
+        <servlet-class>servlet.NotificationsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>NotificationsServlet</servlet-name>
+        <url-pattern>/Notifications</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>

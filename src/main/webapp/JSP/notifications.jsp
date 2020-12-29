@@ -1,14 +1,15 @@
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="bean.User" %>
-<%@ page import="SQLPackage.SQLConnector" %>
+<%@ page import="bean.User" %><%--
+  Created by IntelliJ IDEA.
+  User: jordan
+  Date: 20/12/2020
+  Time: 17:47
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-    <!--
-    New Event
-    http://www.templatemo.com/tm-486-new-event
-    -->
-    <title>StopCovid - Amis</title>
+    <title>StopCovid</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <meta charset="UTF-8">
@@ -21,10 +22,10 @@
     <link rel="stylesheet" href="css/owl.theme.css">
     <link rel="stylesheet" href="css/owl.carousel.css">
 
+
     <!-- Main css -->
     StopCovid    <!-- Main css -->
     <link rel="stylesheet" href="css/style.css">
-
 
 
 <!-- Google Font -->
@@ -34,7 +35,7 @@
 <body data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
 
 <%
-    User user1 = (User) session.getAttribute("user");
+    User user = (User) session.getAttribute("user");
 %>
 
 <!-- =========================
@@ -45,8 +46,6 @@
     <div class="sk-rotating-plane"></div>
 
 </div>
-
-
 
 
 <!-- =========================
@@ -66,11 +65,10 @@
 
         <div class="collapse navbar-collapse">
 
-
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="index" class="smoothScroll">Intro</a></li>
-                <% if (user1 != null) { %>
-                <li><a href="Activites" class="smoothScroll">Activitées</a></li>
+                <% if (user != null) { %>
+                <li><a href="Friend" class="smoothScroll">Amis</a></li>
                 <li><a href="./profile.html" class="smoothScroll">Profil</a></li>
                 <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" href="Notifications">
                     <img src="images/notif.png" alt="notification" width="20" height="20">
@@ -88,53 +86,23 @@
 
 
 <!-- =========================
-    SPEAKERS SECTION
+    OVERVIEW SECTION
 ============================== -->
-<section id="speakers" class="parallax-section">
+<section id="overview" class="parallax-section">
     <div class="container">
         <div class="row">
 
-            <div class="col-md-12 col-sm-12 wow bounceIn">
-                <div class="section-title">
-                    <h2>Ajouter des amis</h2>
-                </div>
-            </div>
+
+
         </div>
-
-        <div class="row">
-            <h4>Rechercher un membre (par pseudo):</h4>
-            <div class="row justify-content-center">
-                <input class="barre-recherche site-search" type="search" id="site-search" name="q"
-                       placeholder="Rechercher un membre"
-                       onkeyup="searchUser(document.getElementById('site-search').value);">
-
-            </div>
-        </div>
-
-
-        <div class="flex-container" id="liste">
-                <% for(User user : (ArrayList<User>)request.getAttribute("users")) { %>
-                <div  class="flex-container-item speakers-wrapper">
-                    <img src="images/user/default.png" class="img-responsive" alt="avatar">
-                    <div class="speakers-thumb">
-                        <h3> <%=user.getLogin()%></h3>
-                        <h6> <%=user.getFirstname()%> <%=user.getLastname()%></h6>
-                    </div>
-                </div>
-                <%     }%>
-
-
-            </div>
-
     </div>
 </section>
-
-
 
 
 <!-- =========================
     FOOTER SECTION
 ============================== -->
+
 <footer>
     <div class="container">
         <div class="row">
@@ -165,13 +133,15 @@
      SCRIPTS
 ============================== -->
 <script src="js/jquery.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="js/jsForPage/inscription.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.parallax.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/smoothscroll.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/custom.js"></script>
-<script src="js/ajoutAmi.js"></script>
+
 
 
 </body>
