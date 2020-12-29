@@ -1,6 +1,7 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class User implements Serializable {
 
@@ -10,6 +11,7 @@ public class User implements Serializable {
     private String lastname;
     private String firstname;
     private String date;
+    private ArrayList<Activitie> activities = new ArrayList<>();
 
     public String getLogin() {
         return login;
@@ -57,5 +59,26 @@ public class User implements Serializable {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public ArrayList<Activitie> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(ArrayList<Activitie> activities) {
+        this.activities = activities;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", admin=" + admin +
+                ", lastname='" + lastname + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", date='" + date + '\'' +
+                ", activities=" + activities +
+                '}';
     }
 }

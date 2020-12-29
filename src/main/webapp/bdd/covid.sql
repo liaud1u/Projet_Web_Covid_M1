@@ -63,8 +63,8 @@ CREATE TABLE IF NOT EXISTS `lieu` (
 DROP TABLE IF EXISTS `activite`;
 CREATE TABLE IF NOT EXISTS `activite` (
   `idActivite` int(32) NOT NULL,
-  `heureDebut` date NOT NULL,
-  `heureFin` date NOT NULL,
+  `dateDebut` datetime NOT NULL,
+  `dateFin` datetime NOT NULL,
   `login` varchar(32) NOT NULL,
   `idLieu` int(32) NOT NULL,
   PRIMARY KEY (`idActivite`),

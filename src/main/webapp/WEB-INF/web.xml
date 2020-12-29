@@ -39,10 +39,23 @@
         <servlet-class>servlet.RechercheMembre</servlet-class>
     </servlet>
 
+
+    <servlet>
+        <servlet-name>ActivitesServlet</servlet-name>
+        <servlet-class>servlet.ActivitesServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ActivitesServlet</servlet-name>
+        <url-pattern>/Activites</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>RechercheMembreServlet</servlet-name>
         <url-pattern>/RechercheMembre</url-pattern>
     </servlet-mapping>
+
+
     <servlet-mapping>
         <servlet-name>InscriptionServlet</servlet-name>
         <url-pattern>/Inscription</url-pattern>

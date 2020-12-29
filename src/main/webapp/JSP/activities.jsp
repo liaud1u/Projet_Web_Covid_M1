@@ -1,11 +1,15 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: jordan
+  Date: 20/12/2020
+  Time: 17:47
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <!--
-    New Event
-    http://www.templatemo.com/tm-486-new-event
-    -->
-    <title>Le Covid c'est pas très sympa - Amis</title>
+    <title>Le Covid c'est pas très sympa</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <meta charset="UTF-8">
@@ -18,14 +22,26 @@
     <link rel="stylesheet" href="css/owl.theme.css">
     <link rel="stylesheet" href="css/owl.carousel.css">
 
+
     <!-- Main css -->
     <link rel="stylesheet" href="css/style.css">
+
 
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Poppins:400,500,600' rel='stylesheet' type='text/css'>
 
 </head>
 <body data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
+
+<!-- =========================
+     PRE LOADER
+============================== -->
+<div class="preloader">
+
+    <div class="sk-rotating-plane"></div>
+
+</div>
+
 
 <!-- =========================
      NAVIGATION LINKS
@@ -44,16 +60,14 @@
 
         <div class="collapse navbar-collapse">
 
-
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="./index.html" class="smoothScroll">Intro</a></li>
                 <li><a href="Friend" class="smoothScroll">Amis</a></li>
-                <li><a href="./activities.html" class="smoothScroll">Activitées</a></li>
+                <li><a href="Activites" class="smoothScroll">Activitées</a></li>
                 <li><a href="./profile.html" class="smoothScroll">Profil</a></li>
                 <li><a href="Inscription" class="smoothScroll">Inscription</a></li>
                 <li><a href="Connexion" class="smoothScroll">Connexion</a></li>
             </ul>
-
 
         </div>
 
@@ -61,86 +75,38 @@
 </div>
 
 
-<!-- =========================
-    SPEAKERS SECTION
-============================== -->
-<section id="speakers" class="parallax-section">
+<section id="register" class="parallax-section">
     <div class="container">
         <div class="row">
 
-            <div class="col-md-12 col-sm-12 wow bounceIn">
-                <div class="section-title">
-                    <h2>Creative Speakers</h2>
-                    <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet.</p>
+            <div class="wow fadeInUp col-md-7 col-sm-7" data-wow-delay="0.6s">
+                <h2>Inscription</h2>
+                <p>F*ckCovid est une application vous permettant de renseigner vos amis, ainsi
+                    que des lieux que vous avez visité, et de notifier toutes les personnes susceptibles d’être contaminées si vous vous déclarez infecté</p>
+            </div>
+
+            <div class="wow fadeInUp col-md-5 col-sm-5" data-wow-delay="1s">
+                <div id="alert">
+
+                </div>
+                <form>
+                    <input name="login" type="text" class="form-control" id="login" placeholder="Login" value="Test" required>
+                    <input name="password" type="password" class="form-control" id="password" placeholder="Password" value="TestTest1" required>
+                    <input name="lastname" type="text" class="form-control" id="lastname" placeholder="Last Name" value="Test" required>
+                    <input name="firstname" type="text" class="form-control" id="firstname" placeholder="First Name" value="Test" required>
+                    <input name="birthdate" type="text" class="form-control" id="birthdate" placeholder="02/04/1997" value="02/04/1997" required>
+                </form>
+                <div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
+                    <input name="submit" type="submit" class="form-control" id="submit" value="Inscription">
                 </div>
             </div>
 
-            <!-- Testimonial Owl Carousel section
-            ================================================== -->
-            <div id="owl-speakers" class="owl-carousel">
-
-                <div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.9s">
-                    <div class="speakers-wrapper">
-                        <img src="images/speakers-img1.jpg" class="img-responsive" alt="speakers">
-                        <div class="speakers-thumb">
-                            <h3>Jenny Green</h3>
-                            <h6>UI Designer</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.6s">
-                    <div class="speakers-wrapper">
-                        <img src="images/speakers-img2.jpg" class="img-responsive" alt="speakers">
-                        <div class="speakers-thumb">
-                            <h3>David Yoon</h3>
-                            <h6>Creative Director</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.9s">
-                    <div class="speakers-wrapper">
-                        <img src="images/speakers-img3.jpg" class="img-responsive" alt="speakers">
-                        <div class="speakers-thumb">
-                            <h3>Je Mary Lee</h3>
-                            <h6>Web Specialist</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.6s">
-                    <div class="speakers-wrapper">
-                        <img src="images/speakers-img4.jpg" class="img-responsive" alt="speakers">
-                        <div class="speakers-thumb">
-                            <h3>Johnathan Doe</h3>
-                            <h6>Frontend Dev</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item wow fadeInUp col-md-3 col-sm-3" data-wow-delay="0.6s">
-                    <div class="speakers-wrapper">
-                        <img src="images/speakers-img5.jpg" class="img-responsive" alt="speakers">
-                        <div class="speakers-thumb">
-                            <h3>Elite Hamilton</h3>
-                            <h6>Marketing Guru</h6>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+            <div class="col-md-1"></div>
 
         </div>
     </div>
 </section>
 
-
-
-
-<!-- =========================
-    FOOTER SECTION
-============================== -->
 <footer>
     <div class="container">
         <div class="row">
@@ -171,12 +137,15 @@
      SCRIPTS
 ============================== -->
 <script src="js/jquery.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="js/jsForPage/inscription.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.parallax.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/smoothscroll.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/custom.js"></script>
+
 
 
 </body>
