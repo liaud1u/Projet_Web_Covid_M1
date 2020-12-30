@@ -69,6 +69,18 @@
         <servlet-class>servlet.FriendsServlet</servlet-class>
     </servlet>
 
+
+    <servlet>
+        <servlet-name>AjoutAmiServlet</servlet-name>
+        <servlet-class>servlet.AjoutAmiServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AjoutAmiServlet</servlet-name>
+        <url-pattern>/AjoutAmi</url-pattern>
+    </servlet-mapping>
+
+
     <servlet-mapping>
         <servlet-name>FriendsServlet</servlet-name>
         <url-pattern>/Amis</url-pattern>

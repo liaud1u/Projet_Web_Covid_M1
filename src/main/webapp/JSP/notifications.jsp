@@ -104,7 +104,7 @@
                 <div  class="flex-container-item speakers-wrapper">
 
                     <div class="speakers-thumb">
-                        <h3><%=notification.getContenu()%> | <%=notification.getDate()%> |  <img src="images/friends/trash.png" alt="corbeille" width="20" height="20"> </h3>
+                        <h3><%=notification.getContenu()%> | <%=notification.getDate()%> <img src="images/friends/trash.png" alt="corbeille" height="60"> </h3>
                     </div>
                 </div> <br>
                 <%     }%>

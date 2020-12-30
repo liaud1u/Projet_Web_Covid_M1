@@ -1,34 +1,29 @@
 package servlet;
 
-
 import SQLPackage.SQLConnector;
 import bean.Notification;
 import bean.User;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "FriendServlet")
-public class NotificationsServlet extends HttpServlet {
+public class AjoutAmiServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        User user = (User)(request.getSession().getAttribute("user"));
 
-        for(Notification n : user.getNotifications()){
-            n.setLu(true);
-            n.save();
-        }
+        User envoyeur = (User) request.getSession().getAttribute("user");
+        String destinataire =  (String) request.getParameter("nom");
 
-        request.getRequestDispatcher("/JSP/notifications.jsp").forward(request, response);
+        Notification notification = new Notification(envoyeur.getLogin()+" ("+envoyeur.getFirstname()+" "+envoyeur.getLastname()+") vous a envoyé une invitation à devenir amis !",envoyeur.getLogin(),destinataire);
+        notification.create();
     }
-
 }

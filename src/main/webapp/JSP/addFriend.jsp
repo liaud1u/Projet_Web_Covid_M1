@@ -120,7 +120,7 @@
                     <div class="speakers-thumb">
                         <h3> <%=user.getLogin()%>
                             <%if(!user1.hasFriend(user.getLogin())){%>
-                            <img src="images/friends/add-friend.png" class="img-responsive" alt="ajouter amis" width="40" style="display: inline-table;">
+                            <img src="images/friends/add-friend.png" class="img-responsive" alt="ajouter amis" width="40" style="display: inline-table;" onclick="ajoutAmi('<%=user.getLogin()%>',document.getElementById('site-search').value)">
                             <%}%>
                         </h3>
                         <h6> <%=user.getFirstname()%> <%=user.getLastname()%></h6>
@@ -177,6 +177,7 @@
 <script src="js/wow.min.js"></script>
 <script src="js/custom.js"></script>
 <script src="js/jsForPage/rechercheMembre.js"></script>
+<script src="js/jsForPage/ajoutAmi.js"></script>
 
 
 </body>

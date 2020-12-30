@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 
 DROP TABLE IF EXISTS `lieu`;
 CREATE TABLE IF NOT EXISTS `lieu` (
-  `idLieu` int(32) NOT NULL,
+  `idLieu` int(32) NOT NULL AUTO_INCREMENT,
   `nom` varchar(64) NOT NULL,
   `adresse` varchar(128) NOT NULL,
   PRIMARY KEY (`idLieu`)
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `lieu` (
 
 DROP TABLE IF EXISTS `activite`;
 CREATE TABLE IF NOT EXISTS `activite` (
-  `idActivite` int(32) NOT NULL,
+  `idActivite` int(32) NOT NULL AUTO_INCREMENT,
   `dateDebut` datetime NOT NULL,
   `dateFin` datetime NOT NULL,
   `login` varchar(32) NOT NULL,
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `ami` (
 
 DROP TABLE IF EXISTS `notification`;
 CREATE TABLE IF NOT EXISTS `notification` (
-  `idNotif` int(32) NOT NULL,
+  `idNotif` int(32) NOT NULL AUTO_INCREMENT,
   `repondu` tinyint(1) NOT NULL,
   `contenu` varchar(128) NOT NULL,
   `lu` tinyint(1) NOT NULL,

@@ -21,6 +21,21 @@ public class SQLConnector {
 				return doUpdate(rqString);
 		}
 
+	public boolean insertNotif(String contenu, String login1, String login2, String date) {
+
+		String rqString =  "Insert into notification(repondu, contenu, lu, date, login1, login2, accepte) values(0, '" +
+				contenu + "', 0, '" + date + "', '" + login1 + "', '" + login2 + "',0);";
+
+		return doUpdate(rqString);
+	}
+
+	public boolean updateNotif(Notification notification) {
+
+		String rqString =  "UPDATE `notification` SET `lu` = '1' WHERE `notification`.`idNotif` = "+notification.getId()+";";
+
+		return doUpdate(rqString);
+	}
+
 		public User getUser(String login, String password) {
 				User user = null;
 				String rqString = "Select * from utilisateur where login='"+login+"';";
@@ -54,7 +69,7 @@ public class SQLConnector {
 
 								user.setActivities(activities);
 
-								String rqStringNotif = "Select * from notification where login1='"+login+"';";
+								String rqStringNotif = "Select * from notification where login2='"+login+"';";
 								ResultSet res3 = doRequest(rqStringNotif);
 
 								ArrayList<Notification> notifs = new ArrayList<>();
@@ -78,7 +93,7 @@ public class SQLConnector {
 
 								try {
 									while (res4.next()) {
-										amis.add(getUsersSimplify(res4.getString("login2")).get(0));
+										amis.add(getUserSimplify(res4.getString("login2")));
 									}
 								} catch (Exception e) {
 									e.printStackTrace();
@@ -157,7 +172,7 @@ public class SQLConnector {
 		try {
 			while (res.next()) {
 				if (i == 0) {
-					notif = new Notification(res.getBoolean("repondu"),res.getBoolean("lu"),res.getDate("date"),res.getString("login2"),res.getBoolean("accepte"),res.getString("contenu"));
+					notif = new Notification(res.getBoolean("repondu"),res.getBoolean("lu"),res.getDate("date"),res.getString("login1"),res.getString("login2"),res.getBoolean("accepte"),res.getString("contenu"),res.getInt("idNotif"));
 				} else {
 					i++;
 					arret("Plus d'une notif ayant le même id ??");
@@ -215,6 +230,35 @@ public class SQLConnector {
 
 			return users;
 		}
+
+	public User getUserSimplify(String login) {
+		User user = new User();
+		String rqString = "Select * from utilisateur where login='"+login+"';";
+		ResultSet res = doRequest(rqString);
+		int i = 0;
+		try {
+			while(res.next()) {
+				if (i == 0) {
+
+					user.setLogin(res.getString("login"));
+					user.setAdmin(res.getBoolean("admin"));
+					user.setLastname(res.getString("nom"));
+					user.setFirstname(res.getString("prenom"));
+					user.setDate(res.getString("date"));
+
+
+				} else {
+					i++;
+					arret("Plus d'un utilisateur ayant le même login ??");
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return user;
+	}
 
 		public  ResultSet doRequest(String sql_string) {
 			   ResultSet results = null;
