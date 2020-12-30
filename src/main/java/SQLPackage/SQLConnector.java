@@ -70,6 +70,22 @@ public class SQLConnector {
 
 								user.setNotifications(notifs);
 
+
+								String rqStringAmis = "Select * from ami where login1='"+login+"';";
+								ResultSet res4 = doRequest(rqStringAmis);
+
+								ArrayList<User> amis = new ArrayList<>();
+
+								try {
+									while (res4.next()) {
+										amis.add(getUsersSimplify(res4.getString("login2")).get(0));
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+
+								user.setIdsFriend(amis);
+
 							} else {
 								i++;
 								arret("Plus d'un utilisateur ayant le même login ??");
@@ -141,7 +157,7 @@ public class SQLConnector {
 		try {
 			while (res.next()) {
 				if (i == 0) {
-					notif = new Notification(res.getBoolean("repondu"),res.getBoolean("lu"),res.getDate("date"),res.getString("login2"),res.getBoolean("accepte"));
+					notif = new Notification(res.getBoolean("repondu"),res.getBoolean("lu"),res.getDate("date"),res.getString("login2"),res.getBoolean("accepte"),res.getString("contenu"));
 				} else {
 					i++;
 					arret("Plus d'une notif ayant le même id ??");
@@ -155,7 +171,7 @@ public class SQLConnector {
 		return notif;
 	}
 
-		public ArrayList<User> getUsers(String login) {
+		public ArrayList<User> getUsersSimplify(String login) {
 			ArrayList<User> users = new ArrayList<>();
 			String rqString = "Select * from utilisateur where login like '%"+login+"%';";
 			ResultSet res = doRequest(rqString);

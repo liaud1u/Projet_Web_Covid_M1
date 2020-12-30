@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 @WebServlet(name = "FriendServlet")
-public class RechercheMembre extends HttpServlet {
+public class RechercheAmiServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
@@ -24,17 +24,19 @@ public class RechercheMembre extends HttpServlet {
         Map<String , String[] > parameter = request.getParameterMap();
 
         SQLConnector connector = new SQLConnector();
-        connector.connect();
 
         String critaire = parameter.get("critaire")[0];
 
+        ArrayList<User> friendToShow = new ArrayList<>();
 
+        for(User f :  ((User)request.getSession().getAttribute("user")).getFriend()){
+            if(f.getLogin().contains(critaire))
+                friendToShow.add(f);
+        }
 
-        ArrayList<User> users = connector.getUsers(critaire);
+        request.setAttribute("users", friendToShow);
 
-        request.setAttribute("users", users);
-
-        request.getRequestDispatcher("/ajax/rechercheMembre.jsp").forward(request, response);
+        request.getRequestDispatcher("/ajax/afficheMembre.jsp").forward(request, response);
     }
 
 }

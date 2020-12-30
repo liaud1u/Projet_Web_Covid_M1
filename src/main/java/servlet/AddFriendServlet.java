@@ -9,13 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 @WebServlet(name = "FriendServlet")
-public class FriendServlet extends HttpServlet {
+public class AddFriendServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
@@ -24,12 +22,11 @@ public class FriendServlet extends HttpServlet {
 
 
         SQLConnector connector = new SQLConnector();
-        connector.connect();
 
-        ArrayList<User> users = connector.getUsers("");
+        ArrayList<User> users = connector.getUsersSimplify("");
         request.setAttribute("users", users);
 
-        request.getRequestDispatcher("/JSP/friend.jsp").forward(request, response);
+        request.getRequestDispatcher("/JSP/addFriend.jsp").forward(request, response);
     }
 
 }

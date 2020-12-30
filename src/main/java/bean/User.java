@@ -13,6 +13,7 @@ public class User implements Serializable {
     private String date;
     private ArrayList<Activitie> activities = new ArrayList<>();
     private ArrayList<Notification> notifications = new ArrayList<>();
+    private ArrayList<User> amis = new ArrayList<>();
 
     public String getLogin() {
         return login;
@@ -100,5 +101,13 @@ public class User implements Serializable {
                 ", activities=" + activities +
                 ", notif=" + notifications +
                 '}';
+    }
+
+    public ArrayList<User> getFriend() {
+        return amis;
+    }
+
+    public void setIdsFriend(ArrayList<User> amis) {
+        this.amis = amis;
     }
 }

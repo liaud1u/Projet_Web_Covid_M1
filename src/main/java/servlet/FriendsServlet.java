@@ -1,7 +1,6 @@
 package servlet;
 
 
-import SQLPackage.SQLConnector;
 import bean.User;
 
 import javax.servlet.ServletException;
@@ -9,12 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 
 @WebServlet(name = "FriendServlet")
-public class ActivitesServlet extends HttpServlet {
+public class FriendsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
@@ -22,14 +19,9 @@ public class ActivitesServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
 
-        HttpSession session = request.getSession();
+        request.setAttribute("users", ((User)request.getSession().getAttribute("user")).getFriend());
 
-        User user = (User) session.getAttribute("user");
-
-        System.out.println(user);
-        System.out.println(user.getNotificationsNonLues());
-
-        request.getRequestDispatcher("/JSP/activities.jsp").forward(request, response);
+        request.getRequestDispatcher("/JSP/friends.jsp").forward(request, response);
     }
 
 }

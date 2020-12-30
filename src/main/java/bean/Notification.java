@@ -8,13 +8,15 @@ public class Notification {
     private Date date;
     private String userConcerne;
     private boolean accepte;
+    private String contenu;
 
-    public Notification(boolean repondu, boolean lu, Date date, String userConcerne, boolean accepte) {
+    public Notification(boolean repondu, boolean lu, Date date, String userConcerne, boolean accepte, String contenu) {
         this.repondu = repondu;
         this.lu = lu;
         this.date = date;
         this.userConcerne = userConcerne;
         this.accepte = accepte;
+        this.contenu = contenu;
     }
 
     public boolean isRepondu() {
@@ -23,6 +25,14 @@ public class Notification {
 
     public boolean isLu() {
         return lu;
+    }
+
+    public String getContenu() {
+        return contenu;
+    }
+
+    public void setContenu(String contenu) {
+        this.contenu = contenu;
     }
 
     public Date getDate() {

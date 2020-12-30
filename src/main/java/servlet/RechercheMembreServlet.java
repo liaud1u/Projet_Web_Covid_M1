@@ -9,27 +9,31 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 @WebServlet(name = "FriendServlet")
-public class ActivitesServlet extends HttpServlet {
+public class RechercheMembreServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        Map<String , String[] > parameter = request.getParameterMap();
 
-        HttpSession session = request.getSession();
+        SQLConnector connector = new SQLConnector();
 
-        User user = (User) session.getAttribute("user");
+        String critaire = parameter.get("critaire")[0];
 
-        System.out.println(user);
-        System.out.println(user.getNotificationsNonLues());
 
-        request.getRequestDispatcher("/JSP/activities.jsp").forward(request, response);
+
+        ArrayList<User> users = connector.getUsersSimplify(critaire);
+
+        request.setAttribute("users", users);
+
+        request.getRequestDispatcher("/ajax/afficheMembre.jsp").forward(request, response);
     }
 
 }

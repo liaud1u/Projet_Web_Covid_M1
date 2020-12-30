@@ -21,7 +21,7 @@ import java.util.Base64;
 @WebServlet(name = "InscriptionServlet")
 public class InscriptionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("MDR");
+
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String lastname = request.getParameter("lastname");

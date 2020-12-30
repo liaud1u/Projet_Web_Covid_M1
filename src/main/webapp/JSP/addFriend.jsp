@@ -1,15 +1,14 @@
-<%@ page import="bean.User" %><%--
-  Created by IntelliJ IDEA.
-  User: jordan
-  Date: 20/12/2020
-  Time: 17:47
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="bean.User" %>
+<%@ page import="SQLPackage.SQLConnector" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>StopCovid</title>
+    <!--
+    New Event
+    http://www.templatemo.com/tm-486-new-event
+    -->
+    <title>StopCovid - Amis</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <meta charset="UTF-8">
@@ -22,21 +21,20 @@
     <link rel="stylesheet" href="css/owl.theme.css">
     <link rel="stylesheet" href="css/owl.carousel.css">
 
-
     <!-- Main css -->
     StopCovid    <!-- Main css -->
     <link rel="stylesheet" href="css/style.css">
 
 
 
-    <!-- Google Font -->
+<!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Poppins:400,500,600' rel='stylesheet' type='text/css'>
 
 </head>
 <body data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
 
 <%
-    User user = (User) session.getAttribute("user");
+    User user1 = (User) session.getAttribute("user");
 %>
 
 <!-- =========================
@@ -47,6 +45,8 @@
     <div class="sk-rotating-plane"></div>
 
 </div>
+
+
 
 
 <!-- =========================
@@ -66,15 +66,16 @@
 
         <div class="collapse navbar-collapse">
 
+
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="index" class="smoothScroll">Intro</a></li>
-                <% if (user != null) { %>
-                <li><a href="AjouterAmi" class="smoothScroll">Ajouter des amis</a></li>
+                <% if (user1 != null) { %>
                 <li><a href="Amis" class="smoothScroll">Mes amis</a></li>
+                <li><a href="Activites" class="smoothScroll">Activitées</a></li>
                 <li><a href="./profile.html" class="smoothScroll">Profil</a></li>
                 <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" onclick="location.href = 'Notifications';">
                     <img src="images/notif.png" alt="notification" width="20" height="20">
-                    <span class="badge badge-pill "><%= user.getNotificationsNonLues().size() %></span>
+                    <span class="badge badge-pill "><%= user1.getNotificationsNonLues().size() %></span>
                 </button>
                 <%   } else { %>
                 <li><a href="Inscription" class="smoothScroll">Inscription</a></li>
@@ -87,38 +88,54 @@
 </div>
 
 
-<section id="register" class="parallax-section">
+<!-- =========================
+    SPEAKERS SECTION
+============================== -->
+<section id="speakers" class="parallax-section">
     <div class="container">
         <div class="row">
 
-            <div class="wow fadeInUp col-md-7 col-sm-7" data-wow-delay="0.6s">
-                <h2>Inscription</h2>
-                <p>StopCovid est une application vous permettant de renseigner vos amis, ainsi
-                    que des lieux que vous avez visité, et de notifier toutes les personnes susceptibles d’être contaminées si vous vous déclarez infecté</p>
-            </div>
-
-            <div class="wow fadeInUp col-md-5 col-sm-5" data-wow-delay="1s">
-                <div id="alert">
-
-                </div>
-                <form>
-                    <input name="login" type="text" class="form-control" id="login" placeholder="Login" value="Test" required>
-                    <input name="password" type="password" class="form-control" id="password" placeholder="Password" value="TestTest1" required>
-                    <input name="lastname" type="text" class="form-control" id="lastname" placeholder="Last Name" value="Test" required>
-                    <input name="firstname" type="text" class="form-control" id="firstname" placeholder="First Name" value="Test" required>
-                    <input name="birthdate" type="text" class="form-control" id="birthdate" placeholder="02/04/1997" value="02/04/1997" required>
-                </form>
-                <div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
-                    <input name="submit" type="submit" class="form-control" id="submit" value="Inscription">
+            <div class="col-md-12 col-sm-12 wow bounceIn">
+                <div class="section-title">
+                    <h2>Ajouter des amis</h2>
                 </div>
             </div>
-
-            <div class="col-md-1"></div>
-
         </div>
+
+        <div class="row">
+            <h4>Rechercher un membre (par pseudo):</h4>
+            <div class="row justify-content-center">
+                <input class="barre-recherche site-search" type="search" id="site-search" name="q"
+                       placeholder="Rechercher un membre"
+                       onkeyup="searchUser(document.getElementById('site-search').value);">
+
+            </div>
+        </div>
+
+
+        <div class="flex-container" id="liste">
+                <% for(User user : (ArrayList<User>)request.getAttribute("users")) { %>
+                <div  class="flex-container-item speakers-wrapper">
+                    <img src="images/user/default.png" class="img-responsive" alt="avatar">
+                    <div class="speakers-thumb">
+                        <h3> <%=user.getLogin()%></h3>
+                        <h6> <%=user.getFirstname()%> <%=user.getLastname()%></h6>
+                    </div>
+                </div>
+                <%     }%>
+
+
+            </div>
+
     </div>
 </section>
 
+
+
+
+<!-- =========================
+    FOOTER SECTION
+============================== -->
 <footer>
     <div class="container">
         <div class="row">
@@ -149,15 +166,13 @@
      SCRIPTS
 ============================== -->
 <script src="js/jquery.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="js/jsForPage/inscription.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.parallax.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/smoothscroll.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/custom.js"></script>
-
+<script src="js/jsForPage/rechercheMembre.js"></script>
 
 
 </body>

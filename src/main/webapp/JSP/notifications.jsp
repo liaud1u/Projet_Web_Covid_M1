@@ -1,4 +1,6 @@
-<%@ page import="bean.User" %><%--
+<%@ page import="bean.User" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="bean.Notification" %><%--
   Created by IntelliJ IDEA.
   User: jordan
   Date: 20/12/2020
@@ -68,9 +70,10 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="index" class="smoothScroll">Intro</a></li>
                 <% if (user != null) { %>
-                <li><a href="Friend" class="smoothScroll">Amis</a></li>
+                <li><a href="AjouterAmi" class="smoothScroll">Ajouter des amis</a></li>
+                <li><a href="Amis" class="smoothScroll">Mes amis</a></li>
                 <li><a href="./profile.html" class="smoothScroll">Profil</a></li>
-                <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" href="Notifications">
+                <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" onclick="location.href = 'Notifications';">
                     <img src="images/notif.png" alt="notification" width="20" height="20">
                     <span class="badge badge-pill "><%= user.getNotificationsNonLues().size() %></span>
                 </button>
@@ -92,6 +95,19 @@
     <div class="container">
         <div class="row">
 
+            <h1>Notifications</h1>
+            <br>
+
+                <%
+
+                    for(Notification notification : ((User)session.getAttribute("user")).getNotifications()) { %>
+                <div  class="flex-container-item speakers-wrapper">
+
+                    <div class="speakers-thumb">
+                         <h3><%=notification.getContenu()%> | <%=notification.getDate()%></h3>
+                    </div>
+                </div> <br>
+                <%     }%>
 
 
         </div>
@@ -123,6 +139,8 @@
         </div>
     </div>
 </footer>
+
+
 
 
 <!-- Back top -->

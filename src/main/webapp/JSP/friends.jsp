@@ -72,7 +72,7 @@
                 <% if (user1 != null) { %>
                 <li><a href="Activites" class="smoothScroll">Activitées</a></li>
                 <li><a href="./profile.html" class="smoothScroll">Profil</a></li>
-                <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" href="Notifications">
+                <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" onclick="location.href = 'Notifications';">
                     <img src="images/notif.png" alt="notification" width="20" height="20">
                     <span class="badge badge-pill "><%= user1.getNotificationsNonLues().size() %></span>
                 </button>
@@ -96,17 +96,17 @@
 
             <div class="col-md-12 col-sm-12 wow bounceIn">
                 <div class="section-title">
-                    <h2>Ajouter des amis</h2>
+                    <h2>Mes amis</h2>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <h4>Rechercher un membre (par pseudo):</h4>
+            <h4>Rechercher un ami (par pseudo):</h4>
             <div class="row justify-content-center">
                 <input class="barre-recherche site-search" type="search" id="site-search" name="q"
                        placeholder="Rechercher un membre"
-                       onkeyup="searchUser(document.getElementById('site-search').value);">
+                       onkeyup="searchFriend(document.getElementById('site-search').value);">
 
             </div>
         </div>
@@ -171,7 +171,7 @@
 <script src="js/smoothscroll.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/custom.js"></script>
-<script src="js/ajoutAmi.js"></script>
+<script src="js/jsForPage/rechercheMembre.js"></script>
 
 
 </body>

@@ -29,6 +29,8 @@ h3,h5 {
 h1 {
     font-size: 40px;
     letter-spacing: 2px;
+    text-align: center;
+    color: #fefafa;
 }
 
 h2 {
@@ -262,7 +264,7 @@ footer {
 
 
 /*---------------------------------------
-    Intro section              
+    Intro section
 -----------------------------------------*/
 #intro {
     background: url('../images/intro-bg.jpg') 50% 0 repeat-y fixed;
@@ -289,7 +291,7 @@ footer {
 
 
 /*---------------------------------------
-   Overview  section              
+   Overview  section
 -----------------------------------------*/
 #overview img {
     position: relative;
@@ -299,7 +301,7 @@ footer {
 
 
 /*---------------------------------------
-    Detail section              
+    Detail section
 -----------------------------------------*/
 #detail {
     background: #222;
@@ -314,7 +316,7 @@ footer {
 
 
 /*---------------------------------------
-    Video section              
+    Video section
 -----------------------------------------*/
 #video iframe {
     border: none;
@@ -323,7 +325,7 @@ footer {
 
 
 /*---------------------------------------
-   Speakers section              
+   Speakers section
 -----------------------------------------*/
 #speakers {
     background: url(../images/intro-bg.jpg) 50% 0 repeat-y fixed;
@@ -765,7 +767,7 @@ Friend section
 }
 
 .flex-container-item {
-    background-color: #f1f1f1;
+    background-color: #666666;
     width: 100px;
     margin: 10px;
     text-align: center;
