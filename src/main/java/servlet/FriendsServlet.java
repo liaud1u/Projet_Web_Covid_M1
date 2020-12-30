@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name = "FriendServlet")
 public class FriendsServlet extends HttpServlet {
@@ -17,6 +18,7 @@ public class FriendsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
 
 
         request.setAttribute("users", ((User)request.getSession().getAttribute("user")).getFriend());

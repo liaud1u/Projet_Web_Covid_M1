@@ -110,4 +110,12 @@ public class User implements Serializable {
     public void setIdsFriend(ArrayList<User> amis) {
         this.amis = amis;
     }
+
+    public boolean hasFriend(String login){
+        for(User u : amis){
+            if(u.getLogin().equals(login))
+                return true;
+        }
+        return false;
+    }
 }

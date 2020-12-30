@@ -31,6 +31,15 @@ public class RechercheMembreServlet extends HttpServlet {
 
         ArrayList<User> users = connector.getUsersSimplify(critaire);
 
+        User me = null;
+
+        for(User user : users){
+            if(user.getLogin().equals(((User)request.getSession().getAttribute("user")).getLogin()))
+                me = user;
+        }
+
+        users.remove(me);
+
         request.setAttribute("users", users);
 
         request.getRequestDispatcher("/ajax/afficheMembre.jsp").forward(request, response);

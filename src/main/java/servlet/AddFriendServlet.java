@@ -24,6 +24,16 @@ public class AddFriendServlet extends HttpServlet {
         SQLConnector connector = new SQLConnector();
 
         ArrayList<User> users = connector.getUsersSimplify("");
+
+        User me = null;
+
+        for(User user : users){
+           if(user.getLogin().equals(((User)request.getSession().getAttribute("user")).getLogin()))
+                me = user;
+        }
+
+        users.remove(me);
+
         request.setAttribute("users", users);
 
         request.getRequestDispatcher("/JSP/addFriend.jsp").forward(request, response);
