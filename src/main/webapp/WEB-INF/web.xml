@@ -75,6 +75,28 @@
         <servlet-class>servlet.AjoutAmiServlet</servlet-class>
     </servlet>
 
+
+    <servlet>
+        <servlet-name>AccepterNotifServlet</servlet-name>
+        <servlet-class>servlet.AccepterNotifServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AccepterNotifServlet</servlet-name>
+        <url-pattern>/AccepterNotif</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>RefuserNotifServlet</servlet-name>
+        <servlet-class>servlet.RefuserNotifServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RefuserNotifServlet</servlet-name>
+        <url-pattern>/RefuserNotif</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>AjoutAmiServlet</servlet-name>
         <url-pattern>/AjoutAmi</url-pattern>

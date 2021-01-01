@@ -6,34 +6,35 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Notification {
-    private boolean repondu;
+    private boolean reponse;
     private boolean lu;
     private Date date;
     private String destinataire;
     private String envoyeur;
-    private boolean accepte;
+    private boolean acceptable;
     private String contenu;
     private int id;
 
-    public Notification(boolean repondu, boolean lu, Date date, String envoyer,String userConcerne, boolean accepte, String contenu, int id) {
-        this.repondu = repondu;
+    public Notification(boolean acceptable, boolean lu, Date date, String envoyer,String userConcerne, boolean reponse, String contenu, int id) {
+        this.reponse = reponse;
         this.lu = lu;
         this.date = date;
         this.destinataire = userConcerne;
-        this.accepte = accepte;
+        this.acceptable = acceptable;
         this.contenu = contenu;
         this.envoyeur=envoyer;
         this.id = id;
     }
 
-    public Notification(String contenu, String envoyer,String userConcerne){
+    public Notification(String contenu, String envoyer,String userConcerne, boolean acceptable){
         this.contenu=contenu;
         this.envoyeur=envoyer;
         this.destinataire=userConcerne;
+        this.acceptable = acceptable;
     }
 
-    public boolean isRepondu() {
-        return repondu;
+    public boolean isReponse() {
+        return reponse;
     }
 
     public boolean isLu() {
@@ -56,16 +57,51 @@ public class Notification {
         return destinataire;
     }
 
-    public boolean isAccepte() {
-        return accepte;
+    public boolean isAcceptable() {
+        return acceptable;
     }
 
-    public void setRepondu(boolean repondu) {
-        this.repondu = repondu;
+    public void accepte() {
+
+        SQLConnector connector = new SQLConnector();
+
+        connector.accepteNotif(this);
+
+        if(!connector.getUserWithoutPass(envoyeur).hasFriend(destinataire))
+            connector.addAmi(envoyeur,destinataire);
+
+        if(!connector.getUserWithoutPass(destinataire).hasFriend(envoyeur))
+            connector.addAmi(destinataire,envoyeur);
+
+        reponse = true;
+        acceptable =false;
+
+        Notification notification = new Notification("Vous êtes désormais ami avec "+destinataire+" !",destinataire,envoyeur,false);
+        notification.create();
     }
 
-    public void setLu(boolean lu) {
-        this.lu = lu;
+    public User getDestinataireUser(){
+        SQLConnector connector = new SQLConnector();
+        return connector.getUserWithoutPass(destinataire);
+    }
+
+    public User getEnvoyeurUser(){
+        SQLConnector connector = new SQLConnector();
+        return connector.getUserWithoutPass(envoyeur);
+    }
+
+    public void refuse() {
+
+        SQLConnector connector = new SQLConnector();
+
+        connector.refuseNotif(this);
+
+        reponse= false;
+        acceptable =false;
+
+
+        Notification notification = new Notification(destinataire+" a refusé votre invitation !",destinataire,envoyeur,true);
+        notification.create();
     }
 
     public void setDate(Date date) {
@@ -76,8 +112,8 @@ public class Notification {
         this.destinataire = destinataire;
     }
 
-    public void setAccepte(boolean accepte) {
-        this.accepte = accepte;
+    public void setAcceptable(boolean acceptable) {
+        this.acceptable = acceptable;
     }
 
     public String getEnvoyeur() {
@@ -91,11 +127,11 @@ public class Notification {
     @Override
     public String toString() {
         return "Notification{" +
-                "repondu=" + repondu +
+                "repondu=" + reponse +
                 ", lu=" + lu +
                 ", date=" + date +
                 ", userConcerne='" + destinataire + '\'' +
-                ", accepte=" + accepte +
+                ", accepte=" + acceptable +
                 '}';
     }
 
@@ -105,13 +141,12 @@ public class Notification {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // your template here
         String date = formatter.format(java.util.Calendar.getInstance().getTime());
 
-        connector.insertNotif(contenu, envoyeur, destinataire,date);
+        connector.insertNotif(contenu, envoyeur, destinataire,date,acceptable?1:0);
     }
 
-    public void save(){
+    public void lu(){
         SQLConnector connector = new SQLConnector();
-
-
+        lu=true;
         connector.updateNotif(this);
     }
 

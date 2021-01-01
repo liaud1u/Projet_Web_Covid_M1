@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
-@WebServlet(name = "FriendServlet")
+@WebServlet(name = "RechercheMembreServlet")
 public class RechercheMembreServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }

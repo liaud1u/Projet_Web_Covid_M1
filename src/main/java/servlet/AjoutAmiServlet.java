@@ -5,12 +5,14 @@ import bean.Notification;
 import bean.User;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+@WebServlet(name = "AjoutAmiServlet")
 public class AjoutAmiServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -23,7 +25,7 @@ public class AjoutAmiServlet extends HttpServlet {
         User envoyeur = (User) request.getSession().getAttribute("user");
         String destinataire =  (String) request.getParameter("nom");
 
-        Notification notification = new Notification(envoyeur.getLogin()+" ("+envoyeur.getFirstname()+" "+envoyeur.getLastname()+") vous a envoyé une invitation à devenir amis !",envoyeur.getLogin(),destinataire);
+        Notification notification = new Notification(envoyeur.getLogin()+" ("+envoyeur.getFirstname()+" "+envoyeur.getLastname()+") vous a envoyé une invitation à devenir amis !",envoyeur.getLogin(),destinataire,true);
         notification.create();
     }
 }

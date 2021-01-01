@@ -21,10 +21,10 @@ public class SQLConnector {
 				return doUpdate(rqString);
 		}
 
-	public boolean insertNotif(String contenu, String login1, String login2, String date) {
+	public boolean insertNotif(String contenu, String login1, String login2, String date, int acceptable) {
 
-		String rqString =  "Insert into notification(repondu, contenu, lu, date, login1, login2, accepte) values(0, '" +
-				contenu + "', 0, '" + date + "', '" + login1 + "', '" + login2 + "',0);";
+		String rqString =  "Insert into notification( contenu, lu, date, login1, login2, accepte, repondu) values('" +
+				contenu + "', 0, '" + date + "', '" + login1 + "', '" + login2 + "',0,"+acceptable+");";
 
 		return doUpdate(rqString);
 	}
@@ -36,7 +36,24 @@ public class SQLConnector {
 		return doUpdate(rqString);
 	}
 
-		public User getUser(String login, String password) {
+	public boolean accepteNotif(Notification notification) {
+
+		String rqString =  "UPDATE `notification` SET `accepte` = '1'  WHERE `notification`.`idNotif` = "+notification.getId()+";";
+		String rqString2 =  "UPDATE `notification` SET `repondu` = '0'  WHERE `notification`.`idNotif` = "+notification.getId()+";";
+
+		return doUpdate(rqString)&& doUpdate(rqString2);
+	}
+
+	public boolean refuseNotif(Notification notification) {
+
+		String rqString =  "UPDATE `notification` SET `accepte` = '0'  WHERE `notification`.`idNotif` = "+notification.getId()+";";
+		String rqString2 =  "UPDATE `notification` SET `repondu` = '0'  WHERE `notification`.`idNotif` = "+notification.getId()+";";
+
+		return doUpdate(rqString) && doUpdate(rqString2);
+	}
+
+
+	public User getUser(String login, String password) {
 				User user = null;
 				String rqString = "Select * from utilisateur where login='"+login+"';";
 				ResultSet res = doRequest(rqString);
@@ -114,6 +131,83 @@ public class SQLConnector {
 
 				return user;
 		}
+
+	public User getUserWithoutPass(String login) {
+		User user = null;
+		String rqString = "Select * from utilisateur where login='"+login+"';";
+		ResultSet res = doRequest(rqString);
+		int i = 0;
+		try {
+			while (res.next()) {
+					if (i == 0) {
+						user = new User();
+						user.setLogin(res.getString("login"));
+						user.setPassword(res.getString("mdp"));
+						user.setAdmin(res.getBoolean("admin"));
+						user.setLastname(res.getString("nom"));
+						user.setFirstname(res.getString("prenom"));
+						user.setDate(res.getString("date"));
+
+						String rqStringActivite = "Select * from activite where login='"+login+"';";
+						ResultSet res2 = doRequest(rqStringActivite);
+
+						ArrayList<Activitie> activities = new ArrayList<>();
+
+						try {
+							while (res2.next()) {
+								Activitie activitie = getActivite(res2.getString("idActivite"));
+								activities.add(activitie);
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
+						user.setActivities(activities);
+
+						String rqStringNotif = "Select * from notification where login2='"+login+"';";
+						ResultSet res3 = doRequest(rqStringNotif);
+
+						ArrayList<Notification> notifs = new ArrayList<>();
+
+						try {
+							while (res3.next()) {
+								Notification notif = getNotification(res3.getString("idNotif"));
+								notifs.add(notif);
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
+						user.setNotifications(notifs);
+
+
+						String rqStringAmis = "Select * from ami where login1='"+login+"';";
+						ResultSet res4 = doRequest(rqStringAmis);
+
+						ArrayList<User> amis = new ArrayList<>();
+
+						try {
+							while (res4.next()) {
+								amis.add(getUserSimplify(res4.getString("login2")));
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
+						user.setIdsFriend(amis);
+
+					} else {
+						i++;
+						arret("Plus d'un utilisateur ayant le même login ??");
+					}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return user;
+	}
 
 		public Activitie getActivite(String id){
 			Activitie activitie = null;
@@ -322,4 +416,11 @@ public class SQLConnector {
 			      System.err.println(message);
 			      System.exit(99);
 		}
+
+    public boolean addAmi(String envoyeur, String destinataire) {
+
+		String rqString =  "Insert into ami(login1, login2) values('"+envoyeur+"','"+destinataire+"');";
+
+		return doUpdate(rqString);
+    }
 }

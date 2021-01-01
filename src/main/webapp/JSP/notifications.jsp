@@ -1,6 +1,7 @@
 <%@ page import="bean.User" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="bean.Notification" %><%--
+<%@ page import="bean.Notification" %>
+<%@ page import="SQLPackage.SQLConnector" %><%--
   Created by IntelliJ IDEA.
   User: jordan
   Date: 20/12/2020
@@ -104,7 +105,21 @@
                 <div  class="flex-container-item speakers-wrapper">
 
                     <div class="speakers-thumb">
-                        <h3><%=notification.getContenu()%> | <%=notification.getDate()%> <img src="images/friends/trash.png" alt="corbeille" height="60"> </h3>
+                        <h3><%=notification.getContenu()%> | <%=notification.getDate()%>
+                            <%if(notification.isAcceptable()){
+
+                                User envoyer = notification.getEnvoyeurUser();
+
+                                if(!envoyer.hasFriend(notification.getDestinataire())){
+
+                            %>
+                            |
+
+                            <button  class="btn btn-lg smoothScroll" onclick="accepterNotif('<%=notification.getId()%>' )">Accepter</button>
+                            <button  class="btn btn-lg smoothScroll" onclick="refuserNotif('<%=notification.getId()%>')">Refuser</button>
+                            <%}
+                            }%>
+                            <img src="images/friends/trash.png" alt="corbeille" height="60"> </h3>
                     </div>
                 </div> <br>
                 <%     }%>
@@ -159,6 +174,7 @@
 <script src="js/smoothscroll.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/custom.js"></script>
+<script src="js/jsForPage/choixNotif.js"></script>
 
 
 

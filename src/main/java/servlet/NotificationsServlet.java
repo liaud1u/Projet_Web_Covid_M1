@@ -1,7 +1,6 @@
 package servlet;
 
 
-import SQLPackage.SQLConnector;
 import bean.Notification;
 import bean.User;
 
@@ -11,9 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 
-@WebServlet(name = "FriendServlet")
+@WebServlet(name = "NotificationsServlet")
 public class NotificationsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
@@ -24,8 +22,7 @@ public class NotificationsServlet extends HttpServlet {
         User user = (User)(request.getSession().getAttribute("user"));
 
         for(Notification n : user.getNotifications()){
-            n.setLu(true);
-            n.save();
+            n.lu();
         }
 
         request.getRequestDispatcher("/JSP/notifications.jsp").forward(request, response);

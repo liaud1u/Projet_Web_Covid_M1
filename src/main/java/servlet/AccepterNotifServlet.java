@@ -1,7 +1,7 @@
 package servlet;
 
 
-import SQLPackage.SQLConnector;
+import bean.Notification;
 import bean.User;
 
 import javax.servlet.ServletException;
@@ -10,33 +10,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 
-@WebServlet(name = "AddFriendServlet")
-public class AddFriendServlet extends HttpServlet {
+@WebServlet(name = "AccepterNotifServlet")
+public class AccepterNotifServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        User user = (User)(request.getSession().getAttribute("user"));
 
-        SQLConnector connector = new SQLConnector();
+        Notification notificationConcerne = null;
 
-        ArrayList<User> users = connector.getUsersSimplify("");
-
-        User me = null;
-
-        for(User user : users){
-           if(user.getLogin().equals(((User)request.getSession().getAttribute("user")).getLogin()))
-                me = user;
+        for(Notification n : user.getNotifications()){
+            if(n.getId()==Integer.valueOf(request.getParameter("id"))){
+                notificationConcerne = n;
+            }
         }
 
-        users.remove(me);
-
-        request.setAttribute("users", users);
-
-        request.getRequestDispatcher("/JSP/addFriend.jsp").forward(request, response);
+        notificationConcerne.accepte();
     }
 
 }
