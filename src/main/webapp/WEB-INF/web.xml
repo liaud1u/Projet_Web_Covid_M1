@@ -36,11 +36,6 @@
     </servlet>
 
     <servlet>
-        <servlet-name>TestDB</servlet-name>
-        <servlet-class>TestBdd</servlet-class>
-    </servlet>
-
-    <servlet>
         <servlet-name>RechercheMembreServlet</servlet-name>
         <servlet-class>servlet.RechercheMembreServlet</servlet-class>
     </servlet>
@@ -91,6 +86,16 @@
         <servlet-name>RefuserNotifServlet</servlet-name>
         <servlet-class>servlet.RefuserNotifServlet</servlet-class>
     </servlet>
+
+    <servlet>
+        <servlet-name>PositifServlet</servlet-name>
+        <servlet-class>servlet.PositifServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PositifServlet</servlet-name>
+        <url-pattern>/Positif</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>RefuserNotifServlet</servlet-name>
@@ -151,9 +156,5 @@
         <url-pattern>/Connexion</url-pattern>
     </servlet-mapping>
 
-    <servlet-mapping>
-        <servlet-name>TestDB</servlet-name>
-        <url-pattern>/TestBdd</url-pattern>
-    </servlet-mapping>
 
 </web-app>

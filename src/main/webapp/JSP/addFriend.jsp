@@ -77,7 +77,10 @@
                     <img src="images/notif.png" alt="notification" width="20" height="20">
                     <span class="badge badge-pill "><%= user1.getNotificationsNonLues().size() %></span>
                 </button>
-                <%   } else { %>
+                <%
+                    if(!user1.isPositif()){%>
+                <a class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s" onclick="if(confirm('Confirmez vous être positif à la Covid19 ?')){positif('<%=user1.getLogin()%>')}">JE SUIS POSITIF</a>
+                <%}%><%   } else { %>
                 <li><a href="Inscription" class="smoothScroll">Inscription</a></li>
                 <% } %>
             </ul>
@@ -178,6 +181,7 @@
 <script src="js/custom.js"></script>
 <script src="js/jsForPage/rechercheMembre.js"></script>
 <script src="js/jsForPage/ajoutAmi.js"></script>
+<script src="js/jsForPage/positif.js"></script>
 
 
 </body>

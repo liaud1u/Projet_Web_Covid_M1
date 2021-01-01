@@ -81,6 +81,10 @@
                     <img src="images/notif.png" alt="notification" width="20" height="20">
                     <span class="badge badge-pill "><%= user.getNotificationsNonLues().size() %></span>
                 </button>
+                <%
+                    if(!user.isPositif()){%>
+                <a class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s" onclick="if(confirm('Confirmez vous être positif à la Covid19 ?')){positif('<%=user.getLogin()%>')}">JE SUIS POSITIF</a>
+                <%}%>
                 <%   } else { %>
                 <li><a href="Inscription" class="smoothScroll">Inscription</a></li>
                 <li><a href="Connexion" class="smoothScroll">Connexion</a></li>
@@ -107,9 +111,16 @@
                 <%if(session.getAttribute("user")==null){%>
                 <a href="Connexion" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">Se connecter</a>
                 <a href="Inscription" class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s">S'inscrire</a>
+                <%}else{
+                    if(!user.isPositif()){%>
+                <a class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s" onclick="if(confirm('Confirmez vous être positif à la Covid19 ?')){positif('<%=user.getLogin()%>')}"><h1>JE SUIS POSITIF</h1></a>
                 <%}else{%>
-                <a class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s"><h1>JE SUIS POSITIF</h1></a>
-                <%}%>
+
+                <h2 class="wow fadeInUp" data-wow-delay="1.6s">Vous vous êtes déclaré positif, tout vos amis et cas contacts ont été prévenu.
+                    Merci de votre participation et bon rétablissement.</h2>
+                <%}
+                }
+                %>
             </div>
 
 
@@ -159,6 +170,7 @@
 <script src="js/smoothscroll.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/custom.js"></script>
+<script src="js/jsForPage/positif.js"></script>
 
 
 </body>

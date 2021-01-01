@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `nom` varchar(32) NOT NULL,
   `prenom` varchar(32) NOT NULL,
   `date` varchar(16) NOT NULL,
+  `positif` tinyint(1) NOT NULL,
   PRIMARY KEY (`login`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 

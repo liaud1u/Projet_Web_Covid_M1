@@ -1,5 +1,7 @@
 package bean;
 
+import SQLPackage.SQLConnector;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -8,6 +10,7 @@ public class User implements Serializable {
     private String login;
     private String password;
     private boolean admin;
+    private boolean positif;
     private String lastname;
     private String firstname;
     private String date;
@@ -21,6 +24,14 @@ public class User implements Serializable {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public boolean isPositif() {
+        return positif;
+    }
+
+    public void setPositif(boolean positif) {
+        this.positif = positif;
     }
 
     public String getPassword() {
@@ -117,5 +128,11 @@ public class User implements Serializable {
                 return true;
         }
         return false;
+    }
+
+    public void declarerPositif(){
+        positif=true;
+        SQLConnector connector =new SQLConnector();
+        connector.setPositif(this);
     }
 }

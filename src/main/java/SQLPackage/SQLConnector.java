@@ -69,54 +69,9 @@ public class SQLConnector {
 								user.setLastname(res.getString("nom"));
 								user.setFirstname(res.getString("prenom"));
 								user.setDate(res.getString("date"));
+								user.setPositif(res.getBoolean("positif"));
 
-								String rqStringActivite = "Select * from activite where login='"+login+"' ORDER BY idActivite DESC ;";
-								ResultSet res2 = doRequest(rqStringActivite);
-
-								ArrayList<Activitie> activities = new ArrayList<>();
-
-								try {
-									while (res2.next()) {
-										Activitie activitie = getActivite(res2.getString("idActivite"));
-										activities.add(activitie);
-									}
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-
-								user.setActivities(activities);
-
-								String rqStringNotif = "Select * from notification where login2='"+login+"' ORDER BY date DESC ;";
-								ResultSet res3 = doRequest(rqStringNotif);
-
-								ArrayList<Notification> notifs = new ArrayList<>();
-
-								try {
-									while (res3.next()) {
-										Notification notif = getNotification(res3.getString("idNotif"));
-										notifs.add(notif);
-									}
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-
-								user.setNotifications(notifs);
-
-
-								String rqStringAmis = "Select * from ami where login1='"+login+"';";
-								ResultSet res4 = doRequest(rqStringAmis);
-
-								ArrayList<User> amis = new ArrayList<>();
-
-								try {
-									while (res4.next()) {
-										amis.add(getUserSimplify(res4.getString("login2")));
-									}
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-
-								user.setIdsFriend(amis);
+								getActivityNotificationsFriends(login, user);
 
 							} else {
 								i++;
@@ -131,6 +86,56 @@ public class SQLConnector {
 
 				return user;
 		}
+
+	private void getActivityNotificationsFriends(String login, User user) {
+		String rqStringActivite = "Select * from activite where login='"+login+"' ORDER BY idActivite DESC ;";
+		ResultSet res2 = doRequest(rqStringActivite);
+
+		ArrayList<Activitie> activities = new ArrayList<>();
+
+		try {
+			while (res2.next()) {
+				Activitie activitie = getActivite(res2.getString("idActivite"));
+				activities.add(activitie);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		user.setActivities(activities);
+
+		String rqStringNotif = "Select * from notification where login2='"+login+"' ORDER BY date DESC ;";
+		ResultSet res3 = doRequest(rqStringNotif);
+
+		ArrayList<Notification> notifs = new ArrayList<>();
+
+		try {
+			while (res3.next()) {
+				Notification notif = getNotification(res3.getString("idNotif"));
+				notifs.add(notif);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		user.setNotifications(notifs);
+
+
+		String rqStringAmis = "Select * from ami where login1='"+login+"';";
+		ResultSet res4 = doRequest(rqStringAmis);
+
+		ArrayList<User> amis = new ArrayList<>();
+
+		try {
+			while (res4.next()) {
+				amis.add(getUserSimplify(res4.getString("login2")));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		user.setIdsFriend(amis);
+	}
 
 	public User getUserWithoutPass(String login) {
 		User user = null;
@@ -147,54 +152,9 @@ public class SQLConnector {
 						user.setLastname(res.getString("nom"));
 						user.setFirstname(res.getString("prenom"));
 						user.setDate(res.getString("date"));
+						user.setPositif(res.getBoolean("positif"));
 
-						String rqStringActivite = "Select * from activite where login='"+login+"' ORDER BY idActivite DESC ;";
-						ResultSet res2 = doRequest(rqStringActivite);
-
-						ArrayList<Activitie> activities = new ArrayList<>();
-
-						try {
-							while (res2.next()) {
-								Activitie activitie = getActivite(res2.getString("idActivite"));
-								activities.add(activitie);
-							}
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-
-						user.setActivities(activities);
-
-						String rqStringNotif = "Select * from notification where login2='"+login+"' ORDER BY date DESC ;";
-						ResultSet res3 = doRequest(rqStringNotif);
-
-						ArrayList<Notification> notifs = new ArrayList<>();
-
-						try {
-							while (res3.next()) {
-								Notification notif = getNotification(res3.getString("idNotif"));
-								notifs.add(notif);
-							}
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-
-						user.setNotifications(notifs);
-
-
-						String rqStringAmis = "Select * from ami where login1='"+login+"';";
-						ResultSet res4 = doRequest(rqStringAmis);
-
-						ArrayList<User> amis = new ArrayList<>();
-
-						try {
-							while (res4.next()) {
-								amis.add(getUserSimplify(res4.getString("login2")));
-							}
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-
-						user.setIdsFriend(amis);
+						getActivityNotificationsFriends(login, user);
 
 					} else {
 						i++;
@@ -301,6 +261,7 @@ public class SQLConnector {
 						user.setLastname(res.getString("nom"));
 						user.setFirstname(res.getString("prenom"));
 						user.setDate(res.getString("date"));
+							user.setPositif(res.getBoolean("positif"));
 
 							String rqStringActivite = "Select * from activite where login='"+loginFraction+"' ORDER BY idActivite DESC ;";
 							ResultSet res2 = doRequest(rqStringActivite);
@@ -346,6 +307,7 @@ public class SQLConnector {
 					user.setLastname(res.getString("nom"));
 					user.setFirstname(res.getString("prenom"));
 					user.setDate(res.getString("date"));
+					user.setPositif(res.getBoolean("positif"));
 
 
 				} else {
@@ -430,4 +392,11 @@ public class SQLConnector {
 
 		return doUpdate(rqString);
     }
+
+	public boolean setPositif(User user) {
+
+		String rqString =  "UPDATE `utilisateur` SET `positif` = '1' WHERE `utilisateur`.`login` = '"+user.getLogin()+"';";
+
+		return doUpdate(rqString);
+	}
 }
