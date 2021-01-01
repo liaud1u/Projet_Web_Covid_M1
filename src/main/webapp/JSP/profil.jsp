@@ -107,6 +107,7 @@
             <h3> Date de naissance : <%= user.getDate()%></h3>
 
             <a class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s" id="modifier">MODIFIER</a>
+            <a class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s" id="deconnexion">DECONNEXION</a>
         </div>
 
         <div class="wow fadeInUp col-md-12 col-sm-12" data-wow-delay="0.6s" id="profilForm" style="display: none;">

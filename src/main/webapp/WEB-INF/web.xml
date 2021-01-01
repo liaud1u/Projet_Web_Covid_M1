@@ -97,6 +97,16 @@
         <servlet-class>servlet.PositifServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>DecoServlet</servlet-name>
+        <servlet-class>servlet.DecoServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DecoServlet</servlet-name>
+        <url-pattern>/Deco</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>PositifServlet</servlet-name>
         <url-pattern>/Positif</url-pattern>

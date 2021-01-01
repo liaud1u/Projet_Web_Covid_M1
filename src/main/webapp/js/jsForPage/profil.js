@@ -6,6 +6,7 @@ function init() {
     $("#firstname").on('input', verifyName);
     $("#birthdate").on('input', verifyDate);
     $("#submit").on('click', modifier);
+    $("#deconnexion").on('click', deconnexion);
 }
 
 function show() {
@@ -123,13 +124,11 @@ function modifier() {
         url: href,
         data : {login: login, password: password, lastname: lastname, firstname: firstname, birthdate: birthdate},
         timeout: 5000,
-        success: (response, xhr) => {
+        success: (response) => {
             if(response==="true") {
                 alert("Modification réussie");
                 window.location = href;
             } else {
-                console.log("status = " + xhr.status);
-                console.log(xhr);
                 const alert = $('#alert');
                 alert.addClass("alert alert-danger");
                 alert.empty();
@@ -141,10 +140,28 @@ function modifier() {
             console.log(xhr);
         }
     })
-
 }
 
+function deconnexion() {
+    var href = window.location.href
+    href = href.substr(0, href.indexOf('/Profil')) + '/Deco';
 
+    $.ajax({
+        type: 'POST',
+        url: href,
+        data : {},
+        timeout: 5000,
+        success: () => {
+            alert("Déconnexion réussie");
+            href = href.substr(0, href.indexOf('/Deco')) + '/index';
+            window.location = href;
+        },
+        error: (xhr) => {
+            console.log("status = " + xhr.status);
+            console.log(xhr);
+        }
+    })
+}
 
 
 
