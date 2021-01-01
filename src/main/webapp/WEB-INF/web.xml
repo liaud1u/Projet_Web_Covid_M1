@@ -57,6 +57,11 @@
         <servlet-name>NotificationsServlet</servlet-name>
         <servlet-class>servlet.NotificationsServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>ProfilServlet</servlet-name>
+        <servlet-class>servlet.ProfilServlet</servlet-class>
+    </servlet>
 
 
     <servlet>
@@ -154,6 +159,11 @@
     <servlet-mapping>
         <servlet-name>ConnexionServlet</servlet-name>
         <url-pattern>/Connexion</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ProfilServlet</servlet-name>
+        <url-pattern>/Profil</url-pattern>
     </servlet-mapping>
 
 

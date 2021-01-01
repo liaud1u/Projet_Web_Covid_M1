@@ -15,10 +15,22 @@ public class SQLConnector {
 
 		public boolean insertUser(String login, String password, String lastname, String firstname, String date) {
 
-				String rqString =  "Insert into utilisateur(login, mdp, admin, nom, prenom, date) values('" + login + "', '" +
-									password + "', 0, '" + lastname + "', '" + firstname + "', '" + date + "');";
+				String rqString =  "Insert into utilisateur(id, login, mdp, admin, nom, prenom, date, positif) values(NULL , '" + login + "', '" +
+									password + "', 0, '" + lastname + "', '" + firstname + "', '" + date + "', 0);";
 
 				return doUpdate(rqString);
+		}
+
+		public boolean updateUser(int id, String login, String password,  String lastname, String firstname, String date, int admin, int positif) {
+			String rqString = "Update `utilisateur` " +
+								"Set login = '" + login + "', mdp = '" + password +
+								"', admin = '" + admin  + "',  nom = '" + lastname +
+								"', prenom = '" + firstname + "', date = '" + date +
+								"', positif = '" + positif + "' " +
+								"Where id = " + id;
+
+			return doUpdate(rqString);
+
 		}
 
 	public boolean insertNotif(String contenu, String login1, String login2, String date, int acceptable) {
@@ -63,6 +75,7 @@ public class SQLConnector {
 						if (PasswordHash.validatePassword(password, res.getString("mdp"))) {
 							if (i == 0) {
 								user = new User();
+								user.setId(res.getInt("id"));
 								user.setLogin(res.getString("login"));
 								user.setPassword(res.getString("mdp"));
 								user.setAdmin(res.getBoolean("admin"));
@@ -86,6 +99,8 @@ public class SQLConnector {
 
 				return user;
 		}
+
+
 
 	private void getActivityNotificationsFriends(String login, User user) {
 		String rqStringActivite = "Select * from activite where login='"+login+"' ORDER BY idActivite DESC ;";
@@ -369,8 +384,8 @@ public class SQLConnector {
 			   System.out.println("Connexion a la base de données");
 
 			   try {
-			   		String DBurl = "jdbc:mysql://localhost/covid";
-			   		con = DriverManager.getConnection(DBurl,"root","");
+			   		String DBurl = "jdbc:mysql://127.0.01:8889/covid";
+			   		con = DriverManager.getConnection(DBurl,"root","root");
 				   	System.out.println("connexion réussie");
 			   }
 			   catch (SQLException e) {

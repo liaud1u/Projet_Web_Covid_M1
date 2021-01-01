@@ -31,14 +31,15 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
-  `login` varchar(32) NOT NULL,
+  `id` mediumint NOT NULL AUTO_INCREMENT,
+  `login` varchar(32) NOT NULL UNIQUE,
   `mdp` varchar(128) NOT NULL,
   `admin` tinyint(1) NOT NULL,
   `nom` varchar(32) NOT NULL,
   `prenom` varchar(32) NOT NULL,
   `date` varchar(16) NOT NULL,
   `positif` tinyint(1) NOT NULL,
-  PRIMARY KEY (`login`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
