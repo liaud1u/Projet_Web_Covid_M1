@@ -182,7 +182,7 @@ public class SQLConnector {
 							Date dateDebut = res.getDate("heureDebut");
 							Date dateFin = res.getDate("heureFin");
 
-							activitie = new Activitie(lieu,dateDebut,dateFin);
+							activitie = new Activitie(res.getInt("idActivite"),lieu,dateDebut,dateFin);
 						} else {
 							i++;
 							arret("Plus d'une activitie ayant le même id ??");

@@ -1,18 +1,15 @@
-<%@ page import="bean.User" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="bean.Notification" %>
-<%@ page import="SQLPackage.SQLConnector" %><%--
-  Created by IntelliJ IDEA.
-  User: jordan
-  Date: 20/12/2020
-  Time: 17:47
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="bean.User" %>
+<%@ page import="SQLPackage.SQLConnector" %>
+<%@ page import="bean.Location" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>StopCovid</title>
+    <!--
+    New Event
+    http://www.templatemo.com/tm-486-new-event
+    -->
+    <title>StopCovid - Amis</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <meta charset="UTF-8">
@@ -25,10 +22,10 @@
     <link rel="stylesheet" href="css/owl.theme.css">
     <link rel="stylesheet" href="css/owl.carousel.css">
 
-
     <!-- Main css -->
     StopCovid    <!-- Main css -->
     <link rel="stylesheet" href="css/style.css">
+
 
 
 <!-- Google Font -->
@@ -38,7 +35,7 @@
 <body data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
 
 <%
-    User user = (User) session.getAttribute("user");
+    User user1 = (User) session.getAttribute("user");
 %>
 
 <!-- =========================
@@ -49,6 +46,8 @@
     <div class="sk-rotating-plane"></div>
 
 </div>
+
+
 
 
 <!-- =========================
@@ -68,22 +67,20 @@
 
         <div class="collapse navbar-collapse">
 
+
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="index" class="smoothScroll">Intro</a></li>
-                <% if (user != null) { %>
-                <li><a href="AjouterAmi" class="smoothScroll">Ajouter des amis</a></li>
-                <li><a href="Amis" class="smoothScroll">Mes amis</a></li>
+                <% if (user1 != null) { %>
                 <li><a href="Activites" class="smoothScroll">Activitées</a></li>
                 <li><a href="./profile.html" class="smoothScroll">Profil</a></li>
                 <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" onclick="location.href = 'Notifications';">
                     <img src="images/notif.png" alt="notification" width="20" height="20">
-                    <span class="badge badge-pill "><%= user.getNotificationsNonLues().size() %></span>
+                    <span class="badge badge-pill "><%= user1.getNotificationsNonLues().size() %></span>
                 </button>
                 <%
-                    if(!user.isPositif()){%>
-                <a class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s" onclick="if(confirm('Confirmez vous être positif à la Covid19 ?')){positif('<%=user.getLogin()%>')}">JE SUIS POSITIF</a>
-                <%}%>
-                <%   } else { %>
+                    if(!user1.isPositif()){%>
+                <a class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s" onclick="if(confirm('Confirmez vous être positif à la Covid19 ?')){positif('<%=user1.getLogin()%>')}">JE SUIS POSITIF</a>
+                <%}%><%   } else { %>
                 <li><a href="Inscription" class="smoothScroll">Inscription</a></li>
                 <% } %>
             </ul>
@@ -95,50 +92,53 @@
 
 
 <!-- =========================
-    OVERVIEW SECTION
+    SPEAKERS SECTION
 ============================== -->
-<section id="overview" class="parallax-section">
+<section id="speakers" class="parallax-section">
     <div class="container">
         <div class="row">
 
-            <h1>Notifications</h1>
-            <br>
+            <div class="col-md-12 col-sm-12 wow bounceIn">
+                <div class="section-title">
+                    <h2>Choix du lieu</h2>
+                </div>
+            </div>
+        </div>
 
-                <%
+        <div class="row">
+            <h4>Rechercher un lieu (par nom):</h4>
+            <div class="row justify-content-center">
+                <input class="barre-recherche site-search" type="search" id="site-search" name="q"
+                       placeholder="Rechercher un lieu"
+                       onkeyup="searchLieu(document.getElementById('site-search').value);">
 
-                    for(Notification notification : ((User)session.getAttribute("user")).getNotifications()) { %>
-                <div  class="flex-container-item speakers-wrapper">
+            </div>
+        </div>
 
-                    <div class="speakers-thumb wow " data-wow-delay="1s">
-                        <h4><%=notification.getContenu()%> | <%=notification.getFormattedDate()%>
-                            <%if(notification.isAcceptable()){
 
-                                User envoyer = notification.getEnvoyeurUser();
-
-                                if(!envoyer.hasFriend(notification.getDestinataire())){
-
-                            %>
-                            |
-
-                            <button  class="btn btn-lg smoothScroll" onclick="accepterNotif('<%=notification.getId()%>' )">Accepter</button>
-                            <button  class="btn btn-lg smoothScroll" onclick="refuserNotif('<%=notification.getId()%>')">Refuser</button>
-                            <%}
-                            }%>
-                            <img src="images/friends/trash.png" alt="corbeille" height="60"> </h4>
-                    </div>
-                </div> <br>
+        <div class="flex-container" id="liste">
+                <% for(Location location : (ArrayList<Location>)request.getAttribute("locations")) { %>
+            <div  class="flex-container-item speakers-wrapper">
+                <img src="images/user/default.png" class="img-responsive" alt="avatar" width="100">
+                <div class="speakers-thumb">
+                    <h3> <%=location.getName()%></h3>
+                    <h6> <%=location.getAdresse()%></h6>
+                </div>
+            </div>
                 <%     }%>
 
 
-        </div>
+            </div>
+
     </div>
 </section>
+
+
 
 
 <!-- =========================
     FOOTER SECTION
 ============================== -->
-
 <footer>
     <div class="container">
         <div class="row">
@@ -161,8 +161,6 @@
 </footer>
 
 
-
-
 <!-- Back top -->
 <a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
 
@@ -171,17 +169,14 @@
      SCRIPTS
 ============================== -->
 <script src="js/jquery.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="js/jsForPage/inscription.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.parallax.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/smoothscroll.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/custom.js"></script>
-<script src="js/jsForPage/choixNotif.js"></script>
+<script src="js/jsForPage/rechercheMembre.js"></script>
 <script src="js/jsForPage/positif.js"></script>
-
 
 
 </body>

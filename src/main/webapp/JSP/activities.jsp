@@ -1,10 +1,5 @@
-<%@ page import="bean.User" %><%--
-  Created by IntelliJ IDEA.
-  User: jordan
-  Date: 20/12/2020
-  Time: 17:47
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="bean.User" %>
+<%@ page import="bean.Activitie" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="fr">
@@ -26,7 +21,6 @@
     <!-- Main css -->
     StopCovid    <!-- Main css -->
     <link rel="stylesheet" href="css/style.css">
-
 
 
     <!-- Google Font -->
@@ -71,6 +65,7 @@
                 <% if (user != null) { %>
                 <li><a href="AjouterAmi" class="smoothScroll">Ajouter des amis</a></li>
                 <li><a href="Amis" class="smoothScroll">Mes amis</a></li>
+                <li><a href="Activites" class="smoothScroll">Activitées</a></li>
                 <li><a href="./profile.html" class="smoothScroll">Profil</a></li>
                 <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" onclick="location.href = 'Notifications';">
                     <img src="images/notif.png" alt="notification" width="20" height="20">
@@ -79,7 +74,8 @@
                 <%
                     if(!user.isPositif()){%>
                 <a class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s" onclick="if(confirm('Confirmez vous être positif à la Covid19 ?')){positif('<%=user.getLogin()%>')}">JE SUIS POSITIF</a>
-                <%}%><%   } else { %>
+                <%}%>
+                <%   } else { %>
                 <li><a href="Inscription" class="smoothScroll">Inscription</a></li>
                 <% } %>
             </ul>
@@ -90,37 +86,59 @@
 </div>
 
 
-<section id="register" class="parallax-section">
+<section id="register" class="parallax-section" style="background-position: 50% 10px;">
     <div class="container">
         <div class="row">
 
-            <div class="wow fadeInUp col-md-7 col-sm-7" data-wow-delay="0.6s">
-                <h2>Inscription</h2>
-                <p>StopCovid est une application vous permettant de renseigner vos amis, ainsi
-                    que des lieux que vous avez visité, et de notifier toutes les personnes susceptibles d’être contaminées si vous vous déclarez infecté</p>
+            <div class="wow fadeInUp animated" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
+                <h2>Ajout d'activité</h2>
+
+
+                <p>StopCovid vous permet de déclarer vos récentes activitées afin de vous prévenir si vous êtes cas contact d'un autre membre. Il vous suffit pour cela de compléter ce formulaire pour être avertit si besoin.     </p></div>
+            </br>
+        </div>
+
+        <div class="wow fadeInUp animated" data-wow-delay="1s" style="visibility: visible; animation-delay: 1s; animation-name: fadeInUp;">
+            <div id="alert">
+
             </div>
 
-            <div class="wow fadeInUp col-md-5 col-sm-5" data-wow-delay="1s">
-                <div id="alert">
-
-                </div>
+            <div class="wow fadeInUp animated" data-wow-delay="1s" style="visibility: visible; animation-delay: 1s; animation-name: fadeInUp;">
                 <form>
-                    <input name="login" type="text" class="form-control" id="login" placeholder="Login" value="Test" required>
-                    <input name="password" type="password" class="form-control" id="password" placeholder="Password" value="TestTest1" required>
-                    <input name="lastname" type="text" class="form-control" id="lastname" placeholder="Last Name" value="Test" required>
-                    <input name="firstname" type="text" class="form-control" id="firstname" placeholder="First Name" value="Test" required>
-                    <input name="birthdate" type="text" class="form-control" id="birthdate" placeholder="02/04/1997" value="02/04/1997" required>
+                    <input name="startDate" type="datetime-local" class="form-control" id="start" placeholder="2021-01-01T08:00" value="2021-01-01T08:00" required="">
+                    <input name="startDate" type="datetime-local" class="form-control" id="end" placeholder="2021-01-01T18:00" value="2021-01-01T18:00" required="">
                 </form>
                 <div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
-                    <input name="submit" type="submit" class="form-control" id="submit" value="Inscription">
+                    <input name="submit" type="submit" class="form-control" id="submit" value="Ajout de l'activité">
                 </div>
             </div>
-
-            <div class="col-md-1"></div>
-
         </div>
+
+        <div class="col-md-1"></div>
+
     </div>
+
 </section>
+
+
+<div class="col-md-1"></div>
+<div class="container">
+    <h1>Votre Historique d'activités</h1>
+    <%
+
+        for(Activitie activitie : ((User)session.getAttribute("user")).getActivities()) { %>
+    <div  class="flex-container-item speakers-wrapper">
+
+        <div class="speakers-thumb wow " data-wow-delay="1s">
+            <h4><%=activitie.getDebutActiviteeFormatted()%> à <%=activitie.getFinActiviteeFormatted()%>
+                <%
+                    activitie.getLocation();
+                %>
+                <img src="images/friends/trash.png" alt="corbeille" height="60"> </h4>
+        </div>
+    </div> <br>
+    <%     }%>
+</div>
 
 <footer>
     <div class="container">
@@ -160,8 +178,6 @@
 <script src="js/smoothscroll.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/custom.js"></script>
-<script src="js/jsForPage/positif.js"></script>
-
 
 
 

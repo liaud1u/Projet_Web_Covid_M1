@@ -7,11 +7,17 @@ public class Activitie {
     private Location location;
     private Date debutActivitee;
     private Date finActivitee;
+    private int id;
 
-    public Activitie(Location location, Date debutActivitee, Date finActivitee) {
+    public Activitie(int id, Location location, Date debutActivitee, Date finActivitee) {
         this.location = location;
         this.debutActivitee = debutActivitee;
         this.finActivitee = finActivitee;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Location getLocation() {
@@ -24,6 +30,19 @@ public class Activitie {
 
     public Date getFinActivitee() {
         return finActivitee;
+    }
+
+    public String getDebutActiviteeFormatted(){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd à HH:mm:ss"); // your template here
+        String date = formatter.format(debutActivitee);
+        return date;
+    }
+
+
+    public String getFinActiviteeFormatted(){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd à HH:mm:ss"); // your template here
+        String date = formatter.format(finActivitee);
+        return date;
     }
 
     @Override

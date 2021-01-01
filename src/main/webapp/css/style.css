@@ -803,3 +803,10 @@ button.btn.btn-lg.smoothScroll {
     border: none;
     color: #ffffff;
 }
+
+/*----
+Activite
+ */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
