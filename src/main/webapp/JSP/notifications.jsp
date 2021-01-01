@@ -105,7 +105,7 @@
                 <div  class="flex-container-item speakers-wrapper">
 
                     <div class="speakers-thumb">
-                        <h3><%=notification.getContenu()%> | <%=notification.getDate()%>
+                        <h4><%=notification.getContenu()%> | <%=notification.getFormattedDate()%>
                             <%if(notification.isAcceptable()){
 
                                 User envoyer = notification.getEnvoyeurUser();
@@ -119,7 +119,7 @@
                             <button  class="btn btn-lg smoothScroll" onclick="refuserNotif('<%=notification.getId()%>')">Refuser</button>
                             <%}
                             }%>
-                            <img src="images/friends/trash.png" alt="corbeille" height="60"> </h3>
+                            <img src="images/friends/trash.png" alt="corbeille" height="60"> </h4>
                     </div>
                 </div> <br>
                 <%     }%>

@@ -144,6 +144,12 @@ public class Notification {
         connector.insertNotif(contenu, envoyeur, destinataire,date,acceptable?1:0);
     }
 
+    public String getFormattedDate(){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd à HH:mm:ss"); // your template here
+        String date = formatter.format(getDate());
+        return date;
+    }
+
     public void lu(){
         SQLConnector connector = new SQLConnector();
         lu=true;

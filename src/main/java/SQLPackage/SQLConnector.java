@@ -70,7 +70,7 @@ public class SQLConnector {
 								user.setFirstname(res.getString("prenom"));
 								user.setDate(res.getString("date"));
 
-								String rqStringActivite = "Select * from activite where login='"+login+"';";
+								String rqStringActivite = "Select * from activite where login='"+login+"' ORDER BY idActivite DESC ;";
 								ResultSet res2 = doRequest(rqStringActivite);
 
 								ArrayList<Activitie> activities = new ArrayList<>();
@@ -86,7 +86,7 @@ public class SQLConnector {
 
 								user.setActivities(activities);
 
-								String rqStringNotif = "Select * from notification where login2='"+login+"';";
+								String rqStringNotif = "Select * from notification where login2='"+login+"' ORDER BY date DESC ;";
 								ResultSet res3 = doRequest(rqStringNotif);
 
 								ArrayList<Notification> notifs = new ArrayList<>();
@@ -148,7 +148,7 @@ public class SQLConnector {
 						user.setFirstname(res.getString("prenom"));
 						user.setDate(res.getString("date"));
 
-						String rqStringActivite = "Select * from activite where login='"+login+"';";
+						String rqStringActivite = "Select * from activite where login='"+login+"' ORDER BY idActivite DESC ;";
 						ResultSet res2 = doRequest(rqStringActivite);
 
 						ArrayList<Activitie> activities = new ArrayList<>();
@@ -164,7 +164,7 @@ public class SQLConnector {
 
 						user.setActivities(activities);
 
-						String rqStringNotif = "Select * from notification where login2='"+login+"';";
+						String rqStringNotif = "Select * from notification where login2='"+login+"' ORDER BY date DESC ;";
 						ResultSet res3 = doRequest(rqStringNotif);
 
 						ArrayList<Notification> notifs = new ArrayList<>();
@@ -267,6 +267,13 @@ public class SQLConnector {
 			while (res.next()) {
 				if (i == 0) {
 					notif = new Notification(res.getBoolean("repondu"),res.getBoolean("lu"),res.getDate("date"),res.getString("login1"),res.getString("login2"),res.getBoolean("accepte"),res.getString("contenu"),res.getInt("idNotif"));
+
+
+					Timestamp timestamp = res.getTimestamp("date");
+					if (timestamp != null)
+						notif.setDate( new java.util.Date(timestamp.getTime()));
+
+
 				} else {
 					i++;
 					arret("Plus d'une notif ayant le même id ??");
@@ -280,9 +287,9 @@ public class SQLConnector {
 		return notif;
 	}
 
-		public ArrayList<User> getUsersSimplify(String login) {
+		public ArrayList<User> getUsersSimplify(String loginFraction) {
 			ArrayList<User> users = new ArrayList<>();
-			String rqString = "Select * from utilisateur where login like '%"+login+"%';";
+			String rqString = "Select * from utilisateur where login like '%"+loginFraction+"%';";
 			ResultSet res = doRequest(rqString);
 			int i = 0;
 			try {
@@ -295,7 +302,7 @@ public class SQLConnector {
 						user.setFirstname(res.getString("prenom"));
 						user.setDate(res.getString("date"));
 
-							String rqStringActivite = "Select * from activite where login='"+login+"';";
+							String rqStringActivite = "Select * from activite where login='"+loginFraction+"' ORDER BY idActivite DESC ;";
 							ResultSet res2 = doRequest(rqStringActivite);
 
 							ArrayList<Activitie> activities = new ArrayList<>();
