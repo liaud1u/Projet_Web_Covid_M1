@@ -101,6 +101,7 @@ public class SQLConnector {
 		user.setFirstname(res.getString("prenom"));
 		user.setDate(res.getString("date"));
 		user.setPositif(res.getBoolean("positif"));
+		user.setAdmin(res.getBoolean("admin"));
 
 		getActivityNotificationsFriends(login, user);
 	}
