@@ -1,7 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="bean.User" %>
 <%@ page import="SQLPackage.SQLConnector" %>
-<%@ page import="bean.Location" %>
+<%@ page import="bean.Lieu" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="fr">
 <head>
@@ -110,6 +110,7 @@
             <div class="row justify-content-center">
                 <input class="barre-recherche site-search" type="search" id="site-search" name="q"
                        placeholder="Rechercher un lieu"
+                       autocomplete="off" autocorrect="off"
                        onkeyup="searchLieu(document.getElementById('site-search').value);">
 
             </div>
@@ -117,16 +118,33 @@
 
 
         <div class="flex-container" id="liste">
-                <% for(Location location : (ArrayList<Location>)request.getAttribute("locations")) { %>
+                <% for(Lieu lieu : (ArrayList<Lieu>)request.getAttribute("lieux")) { %>
             <div  class="flex-container-item speakers-wrapper">
-                <img src="images/user/default.png" class="img-responsive" alt="avatar" width="100">
                 <div class="speakers-thumb">
-                    <h3> <%=location.getName()%></h3>
-                    <h6> <%=location.getAdresse()%></h6>
+                    <h3> <%=lieu.getName()%></h3>
+                    <h6> <%=lieu.getAdresse().replace(",","<br>")%></h6>
+                    <button  class="btn btn-lg smoothScroll" onclick="">Choix du lieu</button>
+
                 </div>
             </div>
                 <%     }%>
+            <div  class="flex-container-item speakers-wrapper">
+                <div class="speakers-thumb">
+                    <h3> Ajouter un
+                        nouveau lieu</h3>
 
+                    <form method="get" action="AjouterLieu">
+                        <input name="nom" class="form-control" type="text" id="nom" placeholder="Nom" value="Faculté des Sciences et Techniques de Nancy (FST)" required="true">
+                        <input name="adresse" class="form-control"  type="text" id="adresse" placeholder="Adresse" value="Campus, Boulevard des Aiguillettes, 54506 Vandœuvre-lès-Nancy" required="true">
+
+                        <div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
+                            <button name="submit" type="submit" id="submit" class="btn btn-lg smoothScroll" >Nouveau Lieu</button>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
 
             </div>
 
@@ -175,7 +193,7 @@
 <script src="js/smoothscroll.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/custom.js"></script>
-<script src="js/jsForPage/rechercheMembre.js"></script>
+<script src="js/jsForPage/rechercheLieu.js"></script>
 <script src="js/jsForPage/positif.js"></script>
 
 

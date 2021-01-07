@@ -109,6 +109,7 @@
             <div class="row justify-content-center">
                 <input class="barre-recherche site-search" type="search" id="site-search" name="q"
                        placeholder="Rechercher un membre"
+                       autocomplete="off" autocorrect="off"
                        onkeyup="searchFriend(document.getElementById('site-search').value);">
 
             </div>

@@ -3,6 +3,7 @@ package servlet;
 import SQLPackage.SQLConnector;
 import bean.Notification;
 import bean.User;
+import com.mysql.cj.Session;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,6 +28,8 @@ public class PositifServlet extends HttpServlet {
 
         user.declarerPositif();
 
+        request.getSession().setAttribute("user",user);
+
         ArrayList<User> friends = user.getFriend();
 
         for(User f : friends){
@@ -34,6 +37,5 @@ public class PositifServlet extends HttpServlet {
             notification.create();
         }
 
-        request.getRequestDispatcher("/JSP/index.jsp").forward(request, response);
     }
 }

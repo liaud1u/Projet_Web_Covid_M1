@@ -6,7 +6,7 @@ function positif(login){
         dataType : 'html',
         success : function(code_html, statut){
             location.href=("Index");
-            location.reload();
         }
     });
+    location.reload();
 }

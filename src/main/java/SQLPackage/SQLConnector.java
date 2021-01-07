@@ -2,7 +2,7 @@ package SQLPackage;
 
 
 import bean.Activitie;
-import bean.Location;
+import bean.Lieu;
 import bean.Notification;
 import bean.User;
 
@@ -192,7 +192,7 @@ public class SQLConnector {
 			try {
 				while (res.next()) {
 						if (i == 0) {
-							Location lieu = getLocation(res.getString("idLieu"));
+							Lieu lieu = getLocation(res.getString("idLieu"));
 
 							Date dateDebut = res.getDate("heureDebut");
 							Date dateFin = res.getDate("heureFin");
@@ -211,15 +211,15 @@ public class SQLConnector {
 			return activitie;
 		}
 
-		public Location getLocation(String id){
-			Location location = null;
+		public Lieu getLocation(String id){
+			Lieu lieu = null;
 			String rqString = "Select * from lieu where idLieu='"+id+"';";
 			ResultSet res = doRequest(rqString);
 			int i = 0;
 			try {
 				while (res.next()) {
 						if (i == 0) {
-							location = new Location(res.getString("nom"),res.getString("adresse"));
+							lieu = new Lieu(res.getString("nom"),res.getString("adresse"));
 						} else {
 							i++;
 							arret("Plus d'une location ayant le même id ??");
@@ -230,8 +230,28 @@ public class SQLConnector {
 				e.printStackTrace();
 			}
 
-			return location;
+			return lieu;
 		}
+
+	public ArrayList<Lieu> getLocations(String locationFraction){
+		ArrayList<Lieu> lieux = new ArrayList<>();
+		Lieu lieu = null;
+		String rqString = "Select * from lieu where nom like '%"+locationFraction+"%' or adresse like '%"+locationFraction+"%'";
+
+		ResultSet res = doRequest(rqString);
+		int i = 0;
+		try {
+			while (res.next()) {
+				lieu = new Lieu(res.getString("nom"),res.getString("adresse"));
+				lieux.add(lieu);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return lieux;
+	}
 
 	public Notification getNotification(String id){
 		Notification notif = null;
@@ -381,12 +401,12 @@ public class SQLConnector {
 			         arret("Impossible de charger le pilote jdbc");
 			   }
 
-			   System.out.println("Connexion a la base de données");
 
 			   try {
-			   		String DBurl = "jdbc:mysql://127.0.01:8889/covid";
-			   		con = DriverManager.getConnection(DBurl,"root","root");
-				   	System.out.println("connexion réussie");
+			   		//String DBurl = "jdbc:mysql://127.0.01:8889/covid";
+				   	String DBurl = "jdbc:mysql://localhost/covid";
+				  	con = DriverManager.getConnection(DBurl,"root","");
+			   		//con = DriverManager.getConnection(DBurl,"root","root");
 			   }
 			   catch (SQLException e) {
 			         arret("Connection à la base de données impossible");
@@ -411,6 +431,13 @@ public class SQLConnector {
 	public boolean setPositif(User user) {
 
 		String rqString =  "UPDATE `utilisateur` SET `positif` = '1' WHERE `utilisateur`.`login` = '"+user.getLogin()+"';";
+
+		return doUpdate(rqString);
+	}
+
+	public boolean insertLieu(String name, String adresse) {
+
+		String rqString =  "Insert into lieu( nom, adresse) values('" +name+"','"+adresse+"');";
 
 		return doUpdate(rqString);
 	}

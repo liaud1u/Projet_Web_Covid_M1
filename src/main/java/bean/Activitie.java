@@ -4,13 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Activitie {
-    private Location location;
+    private Lieu lieu;
     private Date debutActivitee;
     private Date finActivitee;
     private int id;
 
-    public Activitie(int id, Location location, Date debutActivitee, Date finActivitee) {
-        this.location = location;
+    public Activitie(int id, Lieu lieu, Date debutActivitee, Date finActivitee) {
+        this.lieu = lieu;
         this.debutActivitee = debutActivitee;
         this.finActivitee = finActivitee;
         this.id = id;
@@ -20,8 +20,8 @@ public class Activitie {
         return id;
     }
 
-    public Location getLocation() {
-        return location;
+    public Lieu getLocation() {
+        return lieu;
     }
 
     public Date getDebutActivitee() {
@@ -50,7 +50,7 @@ public class Activitie {
         SimpleDateFormat simpleformat = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss Z");
 
         return "Activitie{" +
-                "location=" + location +
+                "location=" + lieu +
                 ", debutActivitee=" + simpleformat.format(debutActivitee) +
                 ", finActivitee=" + simpleformat.format(finActivitee) +
                 '}';

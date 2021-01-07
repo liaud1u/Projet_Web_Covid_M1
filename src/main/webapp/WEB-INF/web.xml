@@ -102,6 +102,40 @@
         <servlet-class>servlet.DecoServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>ChoixLieu</servlet-name>
+        <servlet-class>servlet.ChoixLieuServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>RechercheLieu</servlet-name>
+        <servlet-class>servlet.RechercheLieuServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>AjouterLieu</servlet-name>
+        <servlet-class>servlet.AjouterLieuServlet</servlet-class>
+    </servlet>
+
+
+
+    <servlet-mapping>
+        <servlet-name>AjouterLieu</servlet-name>
+        <url-pattern>/AjouterLieu</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet-mapping>
+        <servlet-name>RechercheLieu</servlet-name>
+        <url-pattern>/RechercheLieu</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ChoixLieu</servlet-name>
+        <url-pattern>/ChoixLieu</url-pattern>
+    </servlet-mapping>
+
+
     <servlet-mapping>
         <servlet-name>DecoServlet</servlet-name>
         <url-pattern>/Deco</url-pattern>

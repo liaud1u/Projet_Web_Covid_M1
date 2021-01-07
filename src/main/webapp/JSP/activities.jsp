@@ -104,13 +104,14 @@
             </div>
 
             <div class="wow fadeInUp animated" data-wow-delay="1s" style="visibility: visible; animation-delay: 1s; animation-name: fadeInUp;">
-                <form>
-                    <input name="startDate" type="datetime-local" class="form-control" id="start" placeholder="2021-01-01T08:00" value="2021-01-01T08:00" required="">
-                    <input name="startDate" type="datetime-local" class="form-control" id="end" placeholder="2021-01-01T18:00" value="2021-01-01T18:00" required="">
+                <form method="get" action="ChoixLieu">
+                    <input name="startDate" class="form-control" type="datetime-local" id="start" placeholder="2021-01-01T08:00" value="2021-01-01T08:00" required="">
+                    <input name="startDate" class="form-control"  type="datetime-local" id="end" placeholder="2021-01-01T18:00" value="2021-01-01T18:00" required="">
+
+                    <div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
+                        <input name="submit" type="submit" id="submit" href="ChoixLieu" value="Ajout de l'activité">
+                    </div>
                 </form>
-                <div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
-                    <input name="submit" type="submit" class="form-control" id="submit" value="Ajout de l'activité">
-                </div>
             </div>
         </div>
 
@@ -171,7 +172,6 @@
 ============================== -->
 <script src="js/jquery.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="js/jsForPage/inscription.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.parallax.js"></script>
 <script src="js/owl.carousel.min.js"></script>

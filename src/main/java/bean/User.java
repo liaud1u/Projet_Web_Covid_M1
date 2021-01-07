@@ -122,6 +122,7 @@ public class User implements Serializable {
                 ", date='" + date + '\'' +
                 ", activities=" + activities +
                 ", notif=" + notifications +
+                ", positif=" + positif +
                 '}';
     }
 
@@ -146,4 +147,5 @@ public class User implements Serializable {
         SQLConnector connector =new SQLConnector();
         connector.setPositif(this);
     }
+
 }
