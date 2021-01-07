@@ -101,6 +101,35 @@
         <servlet-name>DecoServlet</servlet-name>
         <servlet-class>servlet.DecoServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>servlet.AdminServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>AdminUserServlet</servlet-name>
+        <servlet-class>servlet.AdminUserServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>AdminLieuServlet</servlet-name>
+        <servlet-class>servlet.AdminLieuServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>AdminLieuServlet</servlet-name>
+        <url-pattern>/AdminLieu</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/Admin</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>AdminUserServlet</servlet-name>
+        <url-pattern>/AdminUser</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>DecoServlet</servlet-name>

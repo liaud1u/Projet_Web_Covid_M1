@@ -83,6 +83,7 @@ public class SQLConnector {
 								user.setFirstname(res.getString("prenom"));
 								user.setDate(res.getString("date"));
 								user.setPositif(res.getBoolean("positif"));
+								user.setAdmin(res.getBoolean("admin"));
 
 								getActivityNotificationsFriends(login, user);
 
@@ -336,6 +337,25 @@ public class SQLConnector {
 		}
 
 		return user;
+	}
+
+	public ArrayList<Location> getLocationsSimplify(String name){
+			ArrayList<Location> locations = new ArrayList<>();
+			String rqString = "Select * from lieu where nom like '%"+name+"%';";
+			ResultSet res = doRequest(rqString);
+			try {
+				while (res.next()) {
+					Location location = new Location();
+					location.setAdresse(res.getString("adresse"));
+					location.setName(res.getString("nom"));
+					locations.add(location);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return locations;
+
 	}
 
 		public  ResultSet doRequest(String sql_string) {
