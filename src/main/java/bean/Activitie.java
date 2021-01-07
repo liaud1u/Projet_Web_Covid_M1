@@ -1,19 +1,36 @@
 package bean;
 
+import SQLPackage.SQLConnector;
+
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.Date;
 
 public class Activitie {
     private Lieu lieu;
-    private Date debutActivitee;
-    private Date finActivitee;
+    private LocalDateTime debutActivitee;
+    private LocalDateTime finActivitee;
+    private User user;
     private int id;
 
-    public Activitie(int id, Lieu lieu, Date debutActivitee, Date finActivitee) {
+    public Activitie(int id, Lieu lieu, LocalDateTime debutActivitee, LocalDateTime finActivitee, User user) {
         this.lieu = lieu;
         this.debutActivitee = debutActivitee;
         this.finActivitee = finActivitee;
         this.id = id;
+        this.user= user;
+    }
+
+    public Activitie(  Lieu lieu, LocalDateTime debutActivitee, LocalDateTime finActivitee, User user) {
+        this.lieu = lieu;
+        this.debutActivitee = debutActivitee;
+        this.finActivitee = finActivitee;
+        this.user= user;
     }
 
     public int getId() {
@@ -24,35 +41,34 @@ public class Activitie {
         return lieu;
     }
 
-    public Date getDebutActivitee() {
+    public LocalDateTime getDebutActivitee() {
         return debutActivitee;
     }
 
-    public Date getFinActivitee() {
+    public LocalDateTime getFinActivitee() {
         return finActivitee;
     }
 
     public String getDebutActiviteeFormatted(){
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd à HH:mm:ss"); // your template here
-        String date = formatter.format(debutActivitee);
+        String date = debutActivitee.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
         return date;
     }
 
 
     public String getFinActiviteeFormatted(){
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd à HH:mm:ss"); // your template here
-        String date = formatter.format(finActivitee);
+        String date = finActivitee.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
         return date;
     }
 
-    @Override
-    public String toString() {
-        SimpleDateFormat simpleformat = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss Z");
+    public void create(){
+        SQLConnector connector = new SQLConnector();
 
-        return "Activitie{" +
-                "location=" + lieu +
-                ", debutActivitee=" + simpleformat.format(debutActivitee) +
-                ", finActivitee=" + simpleformat.format(finActivitee) +
-                '}';
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // your template here
+
+        debutActivitee.minus(1, ChronoUnit.HOURS);
+        finActivitee.minus(1, ChronoUnit.HOURS);
+
+        connector.insertActivite(formatter.format(Date.from(debutActivitee.toInstant(ZoneOffset.UTC))),formatter.format(Date.from(finActivitee.toInstant(ZoneOffset.UTC))),lieu,user);
     }
 }

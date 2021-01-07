@@ -25,6 +25,8 @@ public class ChoixLieuServlet extends HttpServlet {
 
         ArrayList<Lieu> lieux = connector.getLocations("");
 
+        request.getSession().setAttribute("startDate",request.getParameter("startDate"));
+        request.getSession().setAttribute("endDate",request.getParameter("endDate"));
 
         request.setAttribute("lieux", lieux);
 

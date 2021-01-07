@@ -106,7 +106,7 @@
             <div class="wow fadeInUp animated" data-wow-delay="1s" style="visibility: visible; animation-delay: 1s; animation-name: fadeInUp;">
                 <form method="get" action="ChoixLieu">
                     <input name="startDate" class="form-control" type="datetime-local" id="start" placeholder="2021-01-01T08:00" value="2021-01-01T08:00" required="">
-                    <input name="startDate" class="form-control"  type="datetime-local" id="end" placeholder="2021-01-01T18:00" value="2021-01-01T18:00" required="">
+                    <input name="endDate" class="form-control"  type="datetime-local" id="end" placeholder="2021-01-01T18:00" value="2021-01-01T18:00" required="">
 
                     <div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
                         <input name="submit" type="submit" id="submit" href="ChoixLieu" value="Ajout de l'activité">

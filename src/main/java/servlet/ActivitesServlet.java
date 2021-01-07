@@ -26,8 +26,6 @@ public class ActivitesServlet extends HttpServlet {
 
         User user = (User) session.getAttribute("user");
 
-        System.out.println(user);
-        System.out.println(user.getNotificationsNonLues());
 
         request.getRequestDispatcher("/JSP/activities.jsp").forward(request, response);
     }

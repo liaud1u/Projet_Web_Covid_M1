@@ -148,4 +148,7 @@ public class User implements Serializable {
         connector.setPositif(this);
     }
 
+    public void addActivite(Activitie activitie) {
+        activities.add(activitie);
+    }
 }

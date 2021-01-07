@@ -7,6 +7,8 @@ import bean.Notification;
 import bean.User;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 
 public class SQLConnector {
@@ -194,10 +196,10 @@ public class SQLConnector {
 						if (i == 0) {
 							Lieu lieu = getLocation(res.getString("idLieu"));
 
-							Date dateDebut = res.getDate("heureDebut");
-							Date dateFin = res.getDate("heureFin");
+							LocalDateTime dateDebut = res.getTimestamp("dateDebut").toLocalDateTime();
+							LocalDateTime dateFin = res.getTimestamp("dateFin").toLocalDateTime();
 
-							activitie = new Activitie(res.getInt("idActivite"),lieu,dateDebut,dateFin);
+							activitie = new Activitie(res.getInt("idActivite"),lieu,dateDebut,dateFin,getUserSimplify(res.getString("login")));
 						} else {
 							i++;
 							arret("Plus d'une activitie ayant le même id ??");
@@ -219,7 +221,7 @@ public class SQLConnector {
 			try {
 				while (res.next()) {
 						if (i == 0) {
-							lieu = new Lieu(res.getString("nom"),res.getString("adresse"));
+							lieu = new Lieu(Integer.parseInt(id),res.getString("nom"),res.getString("adresse"));
 						} else {
 							i++;
 							arret("Plus d'une location ayant le même id ??");
@@ -242,7 +244,7 @@ public class SQLConnector {
 		int i = 0;
 		try {
 			while (res.next()) {
-				lieu = new Lieu(res.getString("nom"),res.getString("adresse"));
+				lieu = new Lieu(Integer.parseInt(res.getString("idLieu")),res.getString("nom"),res.getString("adresse"));
 				lieux.add(lieu);
 			}
 
@@ -438,6 +440,14 @@ public class SQLConnector {
 	public boolean insertLieu(String name, String adresse) {
 
 		String rqString =  "Insert into lieu( nom, adresse) values('" +name+"','"+adresse+"');";
+
+		return doUpdate(rqString);
+	}
+
+	public boolean insertActivite(String debutActivitee, String finActivitee, Lieu lieu, User user) {
+
+		String rqString =  "Insert into activite( dateDebut, dateFin, idLieu, login) values('" +
+				debutActivitee + "',  '" + finActivitee + "', '" + lieu.getId() + "', '" + user.getLogin() + "');";
 
 		return doUpdate(rqString);
 	}
