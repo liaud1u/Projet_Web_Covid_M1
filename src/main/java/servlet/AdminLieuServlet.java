@@ -1,7 +1,8 @@
 package servlet;
 
 import SQLPackage.SQLConnector;
-import bean.Location;
+import bean.Activitie;
+import bean.Lieu;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +24,16 @@ public class AdminLieuServlet extends HttpServlet {
                 res = getAllLieu(request);
             }
             break;
+
+            case "getLieu": {
+                res = getLieu(request);
+            }
+            break;
+
+            case "getAllActivite": {
+                res = getAllActivite(request);
+            }
+            break;
         }
 
         response.setContentType("text/plain");
@@ -39,14 +50,44 @@ public class AdminLieuServlet extends HttpServlet {
 
         SQLConnector connector = new SQLConnector();
 
-        ArrayList<Location> locations = connector.getLocationsSimplify(lieu);
+        ArrayList<Lieu> locations = connector.getLocations(lieu);
         StringBuffer stringBuffer = new StringBuffer();
 
-        for (Location location : locations) {
+        for (Lieu location : locations) {
             stringBuffer.append(location.getName());
             stringBuffer.append("|");
         }
 
+
+        return stringBuffer.toString();
+    }
+
+    private String getLieu(HttpServletRequest request) {
+        String name = request.getParameter("name");
+
+        SQLConnector connector = new SQLConnector();
+        Lieu lieu = connector.getLocationByName(name);
+
+
+        return lieu.getName() + "|" + lieu.getAdresse() + "|" + lieu.getId();
+    }
+
+    private String getAllActivite(HttpServletRequest request) {
+        String id = request.getParameter("id");
+
+        SQLConnector sqlConnector = new SQLConnector();
+        ArrayList<Activitie> activities = sqlConnector.getActivitiesByLieu(id);
+
+        StringBuffer stringBuffer = new StringBuffer();
+
+        for (Activitie activitie : activities) {
+            stringBuffer.append(activitie.getDebutActiviteeFormatted());
+            stringBuffer.append(";");
+            stringBuffer.append(activitie.getFinActiviteeFormatted());
+            stringBuffer.append(";");
+            stringBuffer.append(activitie.getUser().getLogin());
+            stringBuffer.append("|");
+        }
 
         return stringBuffer.toString();
     }

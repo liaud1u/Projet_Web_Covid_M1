@@ -19,6 +19,9 @@ public class Activitie {
     private User user;
     private int id;
 
+    public Activitie() {
+    }
+
     public Activitie(int id, Lieu lieu, LocalDateTime debutActivitee, LocalDateTime finActivitee, User user) {
 
         this.lieu = lieu;
@@ -63,6 +66,14 @@ public class Activitie {
         return date;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public Lieu getLieu() {
+        return lieu;
+    }
+
     public void create(){
         SQLConnector connector = new SQLConnector();
 
@@ -73,5 +84,25 @@ public class Activitie {
         finActivitee.minus(1, ChronoUnit.HOURS);
 
         connector.insertActivite(formatter.format(Date.from(debutActivitee.atZone(Clock.systemUTC().getZone()).toInstant())),formatter.format(Date.from(finActivitee.atZone(Clock.systemUTC().getZone()).toInstant())),lieu,user);
+    }
+
+    public void setLieu(Lieu lieu) {
+        this.lieu = lieu;
+    }
+
+    public void setDebutActivitee(LocalDateTime debutActivitee) {
+        this.debutActivitee = debutActivitee;
+    }
+
+    public void setFinActivitee(LocalDateTime finActivitee) {
+        this.finActivitee = finActivitee;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

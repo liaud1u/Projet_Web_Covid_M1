@@ -137,14 +137,16 @@
     </div>
 </section>
 <section id="register" class="parallax-section" >
-    <div class="container">
-        <div class="wow fadeInUp col-md-12 col-sm-12"  id="profil" style="display: none;" >
+    <div class="container" id="infoLieu">
+        <div class="wow fadeInUp col-md-12 col-sm-12"  id="lieu" style="display: none;" >
         </div>
-        <div class="col-lg-2" id="friends" style="display: none;">
-            <h4>Liste d'amis : </h4>
-            <ul class="nav navbar" id="listFriend">
-            </ul>
+
+        <div class="col-lg-10" id="activites" style="display: none;">
+            <h4>Liste d'activite : </h4>
+            <ol class="" id="listActivite">
+            </ol>
         </div>
+
     </div>
 </section>
 

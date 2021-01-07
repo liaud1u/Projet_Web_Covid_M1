@@ -137,15 +137,39 @@
     </div>
 </section>
 <section id="register" class="parallax-section" >
-    <div class="container">
-    <div class="wow fadeInUp col-md-12 col-sm-12"  id="profil" style="display: none;" >
+    <div class="container" id="infoUser" style="display: none;">
+    <div class="wow fadeInUp col-md-12 col-sm-12"  id="profil">
     </div>
-        <div class="col-lg-2" id="friends" style="display: none;">
+        <div class="col-lg-10" id="friends">
             <h4>Liste d'amis : </h4>
             <ul class="nav navbar" id="listFriend">
             </ul>
         </div>
     </div>
+
+    <div class="container" id="modifUser" style="display: none;">
+        <div class="wow fadeInUp col-md-12 col-sm-12" id="profilForm" >
+
+            <div class="wow fadeInUp col-md-12 col-sm-12" data-wow-delay="1s">
+                <div id="alert">
+
+                </div>
+                <form>
+                    <input name="login" type="text" class="form-control" id="loginform" placeholder="Login" required>
+                    <input name="lastname" type="text" class="form-control" id="lastname" placeholder="Last Name"  required>
+                    <input name="firstname" type="text" class="form-control" id="firstname" placeholder="First Name"  required>
+                    <input name="birthdate" type="text" class="form-control" id="birthdate" placeholder="02/04/1997" required>
+                </form>
+                <div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
+                    <input name="submit" type="submit" class="form-control" id="submit" onclick="modifier()" value="Modifier">
+                    <a class="btn btn-lg btn-danger smoothScroll wow fadeInUp" onclick="annuler()" id="annuler">Annuler</a>
+                    <a class="btn btn-lg btn-danger smoothScroll wow fadeInUp" onclick="supprimer()" id="suppr">Supprimer</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </section>
 
 <% } else { %>

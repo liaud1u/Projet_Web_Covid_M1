@@ -34,6 +34,15 @@ public class SQLConnector {
 
 		}
 
+		public void deleteUser(String login) {
+			String rqString = "Delete from utilisateur where login='" + login +"';";
+			doUpdate(rqString);
+			rqString = "Delete from ami where login1='"+ login+ "' or login2='" + login +"';";
+			doUpdate(rqString);rqString = "Delete from notification where login1='"+ login+ "' or login2='" + login +"';";
+			doUpdate(rqString);
+			rqString = "Delete from activite where login='"+ login+ "';";
+			doUpdate(rqString);
+		}
 	public boolean insertNotif(String contenu, String login1, String login2, String date, int acceptable) {
 
 		String rqString =  "Insert into notification( contenu, lu, date, login1, login2, accepte, repondu) values('" +
@@ -166,6 +175,7 @@ public class SQLConnector {
 			while (res.next()) {
 					if (i == 0) {
 						user = new User();
+						user.setId(res.getInt("id"));
 						getUser(login, user, res);
 
 					} else {
@@ -180,6 +190,7 @@ public class SQLConnector {
 
 		return user;
 	}
+
 
 		public Activitie getActivite(String id){
 			Activitie activitie = null;
@@ -236,7 +247,6 @@ public class SQLConnector {
 		String rqString = "Select * from lieu where nom like '%"+locationFraction+"%' or adresse like '%"+locationFraction+"%'";
 
 		ResultSet res = doRequest(rqString);
-		int i = 0;
 		try {
 			while (res.next()) {
 				lieu = new Lieu(Integer.parseInt(res.getString("idLieu")),res.getString("nom"),res.getString("adresse"));
@@ -279,7 +289,7 @@ public class SQLConnector {
 		return notif;
 	}
 
-		public ArrayList<User> getUsersSimplify(String loginFraction) {
+	public ArrayList<User> getUsersSimplify(String loginFraction) {
 			ArrayList<User> users = new ArrayList<>();
 			String rqString = "Select * from utilisateur where login like '%"+loginFraction+"%';";
 			ResultSet res = doRequest(rqString);
@@ -325,6 +335,29 @@ public class SQLConnector {
 			return users;
 		}
 
+	public ArrayList<User> getAllUser(String login) {
+			ArrayList<User> users = new ArrayList<>();
+			String rqString = "Select * from utilisateur where login like '%" + login + "%';";
+			ResultSet res = doRequest(rqString);
+
+			try {
+				while (res.next()) {
+					User user = new User();
+					user.setId(res.getInt("id"));
+					user.setDate(res.getString("date"));
+					user.setLogin(res.getString("login"));
+					user.setFirstname(res.getString("prenom"));
+					user.setLastname(res.getString("nom"));
+					user.setPositif(res.getBoolean("positif"));
+					users.add(user);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return users;
+	}
+
 	public User getUserSimplify(String login) {
 		User user = new User();
 		String rqString = "Select * from utilisateur where login='"+login+"';";
@@ -353,6 +386,26 @@ public class SQLConnector {
 		}
 
 		return user;
+	}
+
+	public ArrayList<Activitie> getActivitiesByLieu(String idLieu) {
+			ArrayList<Activitie> activities = new ArrayList<>();
+			String rqString = "Select * from activite where idLieu='"+idLieu+"';";
+			ResultSet res = doRequest(rqString);
+			try {
+				while (res.next()) {
+					Activitie activitie = new Activitie();
+					activitie.setId(res.getInt("idActivite"));
+					activitie.setDebutActivitee(res.getTimestamp("dateDebut").toLocalDateTime());
+					activitie.setFinActivitee(res.getTimestamp("dateFin").toLocalDateTime());
+					activitie.setUser(getUserWithoutPass(res.getString("login")));
+					activities.add(activitie);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return activities;
 	}
 
 		public  ResultSet doRequest(String sql_string) {
@@ -400,10 +453,10 @@ public class SQLConnector {
 
 
 			   try {
-			   		//String DBurl = "jdbc:mysql://127.0.01:8889/covid";
-				   	String DBurl = "jdbc:mysql://localhost/covid";
-				  	con = DriverManager.getConnection(DBurl,"root","");
-			   		//con = DriverManager.getConnection(DBurl,"root","root");
+			   		String DBurl = "jdbc:mysql://127.0.01:8889/covid";
+				   	//String DBurl = "jdbc:mysql://localhost/covid";
+				  	//con = DriverManager.getConnection(DBurl,"root","root");
+			   		con = DriverManager.getConnection(DBurl,"root","root");
 			   }
 			   catch (SQLException e) {
 			         arret("Connection à la base de données impossible");
