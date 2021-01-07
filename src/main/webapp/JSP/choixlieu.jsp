@@ -123,7 +123,7 @@
                 <div class="speakers-thumb">
                     <h3> <%=lieu.getName()%></h3>
                     <h6> <%=lieu.getAdresse().replace(",","<br>")%></h6>
-                    <button  class="btn btn-lg smoothScroll" onclick="">Choix du lieu</button>
+                    <button  class="btn btn-lg smoothScroll" onclick="selectionLieu('<%=lieu.getName()%>')">Choix du lieu</button>
 
                 </div>
             </div>
@@ -194,6 +194,7 @@
 <script src="js/wow.min.js"></script>
 <script src="js/custom.js"></script>
 <script src="js/jsForPage/rechercheLieu.js"></script>
+<script src="js/jsForPage/selectionLieu.js"></script>
 <script src="js/jsForPage/positif.js"></script>
 
 

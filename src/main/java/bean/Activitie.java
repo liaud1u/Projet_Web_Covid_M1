@@ -3,6 +3,7 @@ package bean;
 import SQLPackage.SQLConnector;
 
 import java.text.SimpleDateFormat;
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -19,6 +20,7 @@ public class Activitie {
     private int id;
 
     public Activitie(int id, Lieu lieu, LocalDateTime debutActivitee, LocalDateTime finActivitee, User user) {
+
         this.lieu = lieu;
         this.debutActivitee = debutActivitee;
         this.finActivitee = finActivitee;
@@ -27,6 +29,7 @@ public class Activitie {
     }
 
     public Activitie(  Lieu lieu, LocalDateTime debutActivitee, LocalDateTime finActivitee, User user) {
+
         this.lieu = lieu;
         this.debutActivitee = debutActivitee;
         this.finActivitee = finActivitee;
@@ -50,13 +53,13 @@ public class Activitie {
     }
 
     public String getDebutActiviteeFormatted(){
-        String date = debutActivitee.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+        String date = debutActivitee.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM,FormatStyle.SHORT));
         return date;
     }
 
 
     public String getFinActiviteeFormatted(){
-        String date = finActivitee.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+        String date = finActivitee.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT));
         return date;
     }
 
@@ -69,6 +72,6 @@ public class Activitie {
         debutActivitee.minus(1, ChronoUnit.HOURS);
         finActivitee.minus(1, ChronoUnit.HOURS);
 
-        connector.insertActivite(formatter.format(Date.from(debutActivitee.toInstant(ZoneOffset.UTC))),formatter.format(Date.from(finActivitee.toInstant(ZoneOffset.UTC))),lieu,user);
+        connector.insertActivite(formatter.format(Date.from(debutActivitee.atZone(Clock.systemUTC().getZone()).toInstant())),formatter.format(Date.from(finActivitee.atZone(Clock.systemUTC().getZone()).toInstant())),lieu,user);
     }
 }

@@ -131,11 +131,12 @@
     <div  class="flex-container-item speakers-wrapper">
 
         <div class="speakers-thumb wow " data-wow-delay="1s">
-            <h4><%=activitie.getDebutActiviteeFormatted()%> à <%=activitie.getFinActiviteeFormatted()%>
-                <%
-                    activitie.getLocation();
-                %>
-                <img src="images/friends/trash.png" alt="corbeille" height="60"> </h4>
+            <h4><%=activitie.getDebutActiviteeFormatted()%> à <%=activitie.getFinActiviteeFormatted()%></h4>
+            <h5>
+                <%=activitie.getLocation().getName() %>
+                <%=activitie.getLocation().getAdresse() %> </h5>
+
+                <img src="images/friends/trash.png" alt="corbeille" height="60"> </h3>
         </div>
     </div> <br>
     <%     }%>

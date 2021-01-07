@@ -8,7 +8,6 @@ import bean.User;
 
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 
 public class SQLConnector {
@@ -78,15 +77,7 @@ public class SQLConnector {
 							if (i == 0) {
 								user = new User();
 								user.setId(res.getInt("id"));
-								user.setLogin(res.getString("login"));
-								user.setPassword(res.getString("mdp"));
-								user.setAdmin(res.getBoolean("admin"));
-								user.setLastname(res.getString("nom"));
-								user.setFirstname(res.getString("prenom"));
-								user.setDate(res.getString("date"));
-								user.setPositif(res.getBoolean("positif"));
-
-								getActivityNotificationsFriends(login, user);
+								getUser(login, user, res);
 
 							} else {
 								i++;
@@ -102,10 +93,21 @@ public class SQLConnector {
 				return user;
 		}
 
+	private void getUser(String login, User user, ResultSet res) throws SQLException {
+		user.setLogin(res.getString("login"));
+		user.setPassword(res.getString("mdp"));
+		user.setAdmin(res.getBoolean("admin"));
+		user.setLastname(res.getString("nom"));
+		user.setFirstname(res.getString("prenom"));
+		user.setDate(res.getString("date"));
+		user.setPositif(res.getBoolean("positif"));
+
+		getActivityNotificationsFriends(login, user);
+	}
 
 
 	private void getActivityNotificationsFriends(String login, User user) {
-		String rqStringActivite = "Select * from activite where login='"+login+"' ORDER BY idActivite DESC ;";
+		String rqStringActivite = "Select * from activite where login='"+login+"' ORDER BY dateFin DESC ;";
 		ResultSet res2 = doRequest(rqStringActivite);
 
 		ArrayList<Activitie> activities = new ArrayList<>();
@@ -163,15 +165,7 @@ public class SQLConnector {
 			while (res.next()) {
 					if (i == 0) {
 						user = new User();
-						user.setLogin(res.getString("login"));
-						user.setPassword(res.getString("mdp"));
-						user.setAdmin(res.getBoolean("admin"));
-						user.setLastname(res.getString("nom"));
-						user.setFirstname(res.getString("prenom"));
-						user.setDate(res.getString("date"));
-						user.setPositif(res.getBoolean("positif"));
-
-						getActivityNotificationsFriends(login, user);
+						getUser(login, user, res);
 
 					} else {
 						i++;
@@ -188,7 +182,7 @@ public class SQLConnector {
 
 		public Activitie getActivite(String id){
 			Activitie activitie = null;
-			String rqString = "Select * from activite where idActivite='"+id+"';";
+			String rqString = "Select * from activite where idActivite='"+id+"' ;";
 			ResultSet res = doRequest(rqString);
 			int i = 0;
 			try {
@@ -199,7 +193,7 @@ public class SQLConnector {
 							LocalDateTime dateDebut = res.getTimestamp("dateDebut").toLocalDateTime();
 							LocalDateTime dateFin = res.getTimestamp("dateFin").toLocalDateTime();
 
-							activitie = new Activitie(res.getInt("idActivite"),lieu,dateDebut,dateFin,getUserSimplify(res.getString("login")));
+	activitie = new Activitie(res.getInt("idActivite"),lieu,dateDebut,dateFin,getUserSimplify(res.getString("login")));
 						} else {
 							i++;
 							arret("Plus d'une activitie ayant le même id ??");
@@ -300,7 +294,7 @@ public class SQLConnector {
 						user.setDate(res.getString("date"));
 							user.setPositif(res.getBoolean("positif"));
 
-							String rqStringActivite = "Select * from activite where login='"+loginFraction+"' ORDER BY idActivite DESC ;";
+							String rqStringActivite = "Select * from activite where login='"+loginFraction+"' ORDER BY dateFin  DESC ;";
 							ResultSet res2 = doRequest(rqStringActivite);
 
 							ArrayList<Activitie> activities = new ArrayList<>();
@@ -450,5 +444,28 @@ public class SQLConnector {
 				debutActivitee + "',  '" + finActivitee + "', '" + lieu.getId() + "', '" + user.getLogin() + "');";
 
 		return doUpdate(rqString);
+	}
+
+	public Lieu getLocationByName(String name) {
+
+		Lieu lieu = null;
+		String rqString = "Select * from lieu where nom='"+name+"';";
+		ResultSet res = doRequest(rqString);
+		int i = 0;
+		try {
+			while (res.next()) {
+				if (i == 0) {
+					lieu = new Lieu(res.getInt("idLieu"),res.getString("nom"),res.getString("adresse"));
+				} else {
+					i++;
+					arret("Plus d'une location ayant le même id ??");
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return lieu;
 	}
 }

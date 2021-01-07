@@ -23,15 +23,9 @@ public class AjouterLieuServlet extends HttpServlet {
         Lieu lieu = new Lieu(request.getParameter("nom"),request.getParameter("adresse"));
         lieu.create();
 
-        LocalDateTime debut = LocalDateTime.parse((CharSequence) request.getSession().getAttribute("startDate"));
-        LocalDateTime fin = LocalDateTime.parse((CharSequence)request.getSession().getAttribute("endDate"));
 
-        Activitie activitie = new Activitie(lieu, debut, fin, (User)request.getSession().getAttribute("user"));
-        activitie.create();
 
-        User user = (User) request.getSession().getAttribute("user");
-        user.addActivite(activitie);
-
-        request.getRequestDispatcher("./Activites").forward(request, response);
+        SelectionLieuServlet.createActivity(request, response, request.getParameter("nom"));
+        request.getRequestDispatcher("Activites").forward(request, response);
     }
 }

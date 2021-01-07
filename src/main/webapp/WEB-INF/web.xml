@@ -117,7 +117,16 @@
         <servlet-class>servlet.AjouterLieuServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>SelectionLieu</servlet-name>
+        <servlet-class>servlet.SelectionLieuServlet</servlet-class>
+    </servlet>
 
+
+    <servlet-mapping>
+        <servlet-name>SelectionLieu</servlet-name>
+        <url-pattern>/SelectionLieu</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>AjouterLieu</servlet-name>

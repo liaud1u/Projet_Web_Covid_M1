@@ -6,12 +6,13 @@
 <div  class="flex-container-item speakers-wrapper">
     <div class="speakers-thumb">
         <h3> <%=lieu.getName()%></h3>
-        <h6> <%=lieu.getAdresse().replace(",","<\br>")%></h6>
-        <button  class="btn btn-lg smoothScroll" onclick="">Choix du lieu</button>
+        <h6> <%=lieu.getAdresse().replace(",","<br>")%></h6>
+        <button  class="btn btn-lg smoothScroll" onclick="selectionLieu('<%=lieu.getName()%>')">Choix du lieu</button>
 
     </div>
 </div>
 <%     }%>
+
 <div  class="flex-container-item speakers-wrapper">
     <div class="speakers-thumb">
         <h3> Ajouter un
