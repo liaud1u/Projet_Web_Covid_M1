@@ -398,7 +398,7 @@ public class SQLConnector {
 					activitie.setId(res.getInt("idActivite"));
 					activitie.setDebutActivitee(res.getTimestamp("dateDebut").toLocalDateTime());
 					activitie.setFinActivitee(res.getTimestamp("dateFin").toLocalDateTime());
-					activitie.setUser(getUserWithoutPass(res.getString("login")));
+					activitie.setUser(getUserSimplify(res.getString("login")));
 					activities.add(activitie);
 				}
 			} catch (Exception e) {

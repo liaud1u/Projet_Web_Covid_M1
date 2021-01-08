@@ -368,6 +368,7 @@ footer {
 
 #speakers .speakers-wrapper {
     background: #666666;
+    display: flex;
 }
 
 
@@ -442,10 +443,12 @@ footer {
     color: #ffffff;
 }
 
+section#register {}
+
 #register .form-control {
     background: transparent;
     border: 2px solid #ffffff;
-    border-radius: 0px;
+    /* border-radius: 0px; */
     color: #ffffff;
     margin-bottom: 16px;
 }
@@ -811,3 +814,34 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     filter: invert(1);
 }
 
+
+#lieu {
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+    color: #ffffff;
+}
+
+#lieu .form-control {
+    background: transparent;
+    border: 2px solid #333333;
+    /* border-radius: 0px; */
+    color: #333333;
+    margin-bottom: 16px;
+}
+
+#lieu input[type="submit"] {
+    background: #f2545f;
+    border-radius: 100px;
+    border: none;
+    color: #ffffff;
+    letter-spacing: 2px;
+    height: 50px;
+    margin-top: 12px;
+    transition: all 0.4s ease-in-out;
+}
+
+#lieu input[type="submit"]:hover {
+    background: #ffffff;
+    color: #222;
+}

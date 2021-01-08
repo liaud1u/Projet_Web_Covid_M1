@@ -128,23 +128,27 @@
                 </div>
             </div>
                 <%     }%>
-            <div  class="flex-container-item speakers-wrapper">
-                <div class="speakers-thumb">
-                    <h3> Ajouter un
-                        nouveau lieu</h3>
-
-                    <form method="get" action="AjouterLieu">
-                        <input name="nom" class="form-control" type="text" id="nom" placeholder="Nom" value="Faculté des Sciences et Techniques de Nancy (FST)" required="true">
-                        <input name="adresse" class="form-control"  type="text" id="adresse" placeholder="Adresse" value="Campus, Boulevard des Aiguillettes, 54506 Vandœuvre-lès-Nancy" required="true">
-
-                        <div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
-                            <button name="submit" type="submit" id="submit" class="btn btn-lg smoothScroll" >Nouveau Lieu</button>
-                        </div>
-                    </form>
 
 
+            <section id="lieu" class="parallax-section">
+                <div  class="flex-container-item speakers-wrapper">
+                    <div class="speakers-thumb">
+                        <h3> Ajouter un
+                            nouveau lieu</h3>
+
+                        <form method="get" action="AjouterLieu">
+                            <input name="nom" class="form-control" type="text" id="nom" placeholder="Nom" autocomplete="off" autocorrect="off" required="true">
+                            <input name="adresse" class="form-control"  type="text" id="adresse" placeholder="Adresse" autocomplete="off" autocorrect="off" required="true">
+
+                            <div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10" style="margin-left: 5%;">
+                                <button name="submit" type="submit" id="submit" class="btn btn-lg smoothScroll" >Nouveau Lieu</button>
+                            </div>
+                        </form>
+
+
+                    </div>
                 </div>
-            </div>
+            </section>
 
             </div>
 

@@ -124,7 +124,7 @@
                             <button  class="btn btn-lg smoothScroll" onclick="refuserNotif('<%=notification.getId()%>')">Refuser</button>
                             <%}
                             }%>
-                            <img src="images/friends/trash.png" alt="corbeille" height="60"> </h4>
+
                     </div>
                 </div> <br>
                 <%     }%>

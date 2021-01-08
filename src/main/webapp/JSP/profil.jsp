@@ -182,4 +182,5 @@
 <script src="js/smoothscroll.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/custom.js"></script>
+    <script src="js/jsForPage/positif.js"></script>
 

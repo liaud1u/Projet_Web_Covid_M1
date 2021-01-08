@@ -136,7 +136,6 @@
                 <%=activitie.getLocation().getName() %>
                 <%=activitie.getLocation().getAdresse() %> </h5>
 
-                <img src="images/friends/trash.png" alt="corbeille" height="60"> </h3>
         </div>
     </div> <br>
     <%     }%>
@@ -179,6 +178,7 @@
 <script src="js/smoothscroll.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/custom.js"></script>
+<script src="js/jsForPage/positif.js"></script>
 
 
 
