@@ -80,10 +80,8 @@ public class Activitie {
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // your template here
 
-        debutActivitee.minus(1, ChronoUnit.HOURS);
-        finActivitee.minus(1, ChronoUnit.HOURS);
 
-        connector.insertActivite(formatter.format(Date.from(debutActivitee.atZone(Clock.systemUTC().getZone()).toInstant())),formatter.format(Date.from(finActivitee.atZone(Clock.systemUTC().getZone()).toInstant())),lieu,user);
+        connector.insertActivite(formatter.format(Date.from( debutActivitee.minus(1, ChronoUnit.HOURS).atZone(Clock.systemUTC().getZone()).toInstant())),formatter.format(Date.from(finActivitee.minus(1, ChronoUnit.HOURS).atZone(Clock.systemUTC().getZone()).toInstant())),lieu,user);
     }
 
     public void setLieu(Lieu lieu) {

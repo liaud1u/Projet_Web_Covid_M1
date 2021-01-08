@@ -453,10 +453,10 @@ public class SQLConnector {
 
 
 			   try {
-			   		String DBurl = "jdbc:mysql://127.0.01:8889/covid";
-				   	//String DBurl = "jdbc:mysql://localhost/covid";
-				  	//con = DriverManager.getConnection(DBurl,"root","root");
-			   		con = DriverManager.getConnection(DBurl,"root","root");
+			   		//String DBurl = "jdbc:mysql://127.0.01:8889/covid";
+				   	String DBurl = "jdbc:mysql://localhost/covid";
+				  	con = DriverManager.getConnection(DBurl,"root","");
+			   		//con = DriverManager.getConnection(DBurl,"root","root");
 			   }
 			   catch (SQLException e) {
 			         arret("Connection à la base de données impossible");

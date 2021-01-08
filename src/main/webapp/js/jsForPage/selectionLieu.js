@@ -5,7 +5,7 @@ function selectionLieu(name) {
         data : 'name=' + name,
         dataType : 'html',
         success : function(code_html, statut){
-            location.href=("Index");
+            location.href=("Activites");
         }
     });
 }

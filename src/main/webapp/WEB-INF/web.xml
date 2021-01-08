@@ -12,7 +12,7 @@
 
     <error-page>
         <error-code>404</error-code>
-        <location>/not-found-page.html</location>
+        <location>/404</location>
     </error-page>
 
     <servlet>
@@ -116,7 +116,18 @@
         <servlet-name>AdminLieuServlet</servlet-name>
         <servlet-class>servlet.AdminLieuServlet</servlet-class>
     </servlet>
-    
+
+
+    <servlet>
+        <servlet-name>404</servlet-name>
+        <servlet-class>servlet.ErrorServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>404</servlet-name>
+        <url-pattern>/404</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>AdminLieuServlet</servlet-name>
         <url-pattern>/AdminLieu</url-pattern>

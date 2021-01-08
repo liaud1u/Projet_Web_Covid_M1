@@ -1,3 +1,4 @@
+<%@ page import="bean.User" %>
 <!DOCTYPE html>
         <html lang="fr">
         <head>
@@ -27,6 +28,10 @@
 
         </head>
 <body data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
+
+<%
+    User user1 = (User) session.getAttribute("user");
+%>
 
 <!-- =========================
      NAVIGATION LINKS
