@@ -152,7 +152,6 @@ function deconnexion() {
         data : {},
         timeout: 5000,
         success: () => {
-            alert("Déconnexion réussie");
             href = href.substr(0, href.indexOf('/Deco')) + '/index';
             window.location = href;
         },
