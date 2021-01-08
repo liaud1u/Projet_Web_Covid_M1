@@ -47,7 +47,7 @@ public class ProfilServlet extends HttpServlet {
             } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
                 e.printStackTrace();
             }
-            //TODO: ajouter verification mot de passe
+
         }
     }
 
