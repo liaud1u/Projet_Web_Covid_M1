@@ -76,6 +76,10 @@
                 <%   } else { %>
                 <li><a href="Inscription" class="smoothScroll">Inscription</a></li>
                 <% } %>
+                <% if (user.isAdmin()) { %>
+                <li><a href="Admin" class="smoothScroll">Admin</a></li>
+
+                <% } %>
             </ul>
 
         </div>

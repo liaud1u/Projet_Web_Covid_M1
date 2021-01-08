@@ -75,6 +75,10 @@
                 <li><a href="Amis" class="smoothScroll">Mes amis</a></li>
                 <li><a href="Activites" class="smoothScroll">Activitées</a></li>
                 <li><a href="Profil" class="smoothScroll">Profil</a></li>
+                <% if (user.isAdmin()) { %>
+                <li><a href="Admin" class="smoothScroll">Admin</a></li>
+
+                <% } %>
                 <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" onclick="location.href = 'Notifications';">
                     <img src="images/notif.png" alt="notification" width="20" height="20">
                     <span class="badge badge-pill "><%= user.getNotificationsNonLues().size() %></span>
