@@ -133,7 +133,6 @@ function modifier() {
         data : {type: "modifProfil", login: login,  lastname: lastname, firstname: firstname, birthdate: birthdate, ancienLogin: user.login},
         timeout: 5000,
         success: (response) => {
-            console.log(response);
             if(response==="true") {
                 $("#modifUser").css("display", "none");
                 afficheInfos();

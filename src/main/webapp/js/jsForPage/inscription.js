@@ -104,7 +104,6 @@ function inscription() {
         timeout: 5000,
         success: (response) => {
            if(response==="true") {
-               alert("Inscription réussie");
                href = href.substr(0, href.indexOf('/Inscription')) + "/Connexion";
                window.location = href;
            } else {

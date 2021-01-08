@@ -492,6 +492,18 @@ public class SQLConnector {
 		return doUpdate(rqString);
 	}
 
+	public boolean modifLieu(String nom, String adresse, int id){
+			String rqString = "Update `lieu` Set nom='" + nom + "', adresse='" + adresse +"' Where idLieu=" + id +";";
+			return doUpdate(rqString);
+	}
+
+	public void deleteLieu(int id){
+			String rqString = "Delete from lieu where idLieu="+id+";";
+			doUpdate(rqString);
+			rqString = "Delete from activite where idLieu="+id+";";
+			doUpdate(rqString);
+	}
+
 	public boolean insertActivite(String debutActivitee, String finActivitee, Lieu lieu, User user) {
 
 		String rqString =  "Insert into activite( dateDebut, dateFin, idLieu, login) values('" +

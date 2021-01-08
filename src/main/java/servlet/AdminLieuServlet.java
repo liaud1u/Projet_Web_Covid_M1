@@ -34,6 +34,15 @@ public class AdminLieuServlet extends HttpServlet {
                 res = getAllActivite(request);
             }
             break;
+
+            case "modifier": {
+                res = modifier(request);
+            }
+            break;
+
+            case "delete": {
+                delete(request);
+            }
         }
 
         response.setContentType("text/plain");
@@ -90,5 +99,23 @@ public class AdminLieuServlet extends HttpServlet {
         }
 
         return stringBuffer.toString();
+    }
+
+    private String modifier(HttpServletRequest request) {
+        String id = request.getParameter("id");
+        String nom = request.getParameter("nom");
+        String adr = request.getParameter("adresse");
+
+        SQLConnector connector = new SQLConnector();
+
+        return connector.modifLieu(nom, adr, Integer.parseInt(id)) ? "true" : "false";
+    }
+
+    private void delete(HttpServletRequest request) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        SQLConnector connector = new SQLConnector();
+
+        connector.deleteLieu(id);
+
     }
 }

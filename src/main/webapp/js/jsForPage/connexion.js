@@ -19,7 +19,6 @@ function connexion() {
             if (response === "true") {
                 alertNotif.empty();
                 alertNotif.removeClass('alert alert-danger');
-                alert("Connexion réussit");
                 href = href.substr(0, href.indexOf('/Connexion'));
                 window.location = href;
             } else {

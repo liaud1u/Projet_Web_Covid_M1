@@ -4,6 +4,8 @@ function init() {
     $("#infos").on("click", afficheInfos);
 }
 
+let lieu = {nom: "", adresse: "", id: ""};
+
 function searchLieu() {
     const lieu = $("#searchLieu").val();
     var href = window.location.href
@@ -41,7 +43,7 @@ function fillInput() {
 }
 
 function afficheInfos() {
-    $("#lieu").css("display", "block");
+    $("#infoLieu").css("display", "block");
     let name = $("#searchLieu").val();
     var href = window.location.href;
 
@@ -51,8 +53,11 @@ function afficheInfos() {
         data: {type: "getLieu", name: name},
         success: (response) => {
            let res = response.split('|');
-           fillLieu(res);
-           afficheActivite(res[2]);
+           lieu.nom = res[0];
+           lieu.adresse = res[1];
+           lieu.id = res[2];
+           fillLieu();
+           afficheActivite();
         },
         error: (xhr) => {
             console.log("status = " + xhr.status);
@@ -62,25 +67,26 @@ function afficheInfos() {
     })
 }
 
-function fillLieu(lieu) {
-    let name = $("<h3></h3>").text("Nom: " + lieu[0]);
-    let adr = $("<h3></h3>").text("Adresse: " + lieu[1]);
+function fillLieu() {
+    let name = $("<h3></h3>").text("Nom: " + lieu.nom);
+    let adr = $("<h3></h3>").text("Adresse: " + lieu.adresse);
     $("#lieu").empty();
     $("#lieu").append(name, adr);
 }
 
-function afficheActivite(id) {
-    $("#activites").css("display", "block");
+function afficheActivite() {
     var href = window.location.href;
 
     $.ajax({
         type: 'POST',
         url: href,
-        data: {type: "getAllActivite", id: id},
+        data: {type: "getAllActivite", id: lieu.id},
         success: (response) => {
+            $("#listActivite").empty();
            let activite = response.split('|');
            activite.forEach(activite => affichageList(activite));
-           $("#infoLieu").append('<a class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s" id="modif">Modifier les informations</a>');
+           $("#modif").remove();
+           $("#infoLieu").append('<a class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s" onclick="modif()" id="modif">Modifier les informations</a>');
         },
         error: (xhr) => {
             console.log("status = " + xhr.status);
@@ -97,6 +103,68 @@ function affichageList(activite) {
         let li = $("<li></li>").text(txt);
         $("#listActivite").append(li);
     }
+}
+
+function modif() {
+    $("#infoLieu").css("display", "none");
+    $("#modifLieu").css("display", "block");
+
+    $("#nomForm").val(lieu.nom);
+    $("#adresseForm").val(lieu.adresse);
+}
+
+function modifier() {
+    let nom = $("#nomForm").val();
+    let adresse = $("#adresseForm").val();
+
+    let href = window.location.href;
+
+    $.ajax({
+        type: 'POST',
+        url: href,
+        data: {type: "modifier", nom: nom, adresse: adresse, id: lieu.id},
+        timeout: 5000,
+        success: (response) => {
+            if(response==="true") {
+                $("#modifLieu").css("display", "none");
+                $("#searchLieu").val(nom);
+                afficheInfos();
+            } else {
+                const alert = $('#alert');
+                alert.addClass("alert alert-danger");
+                alert.empty();
+                alert.append("Modification impossible !");
+            }
+        },
+        error: (xhr) => {
+            console.log("status = " + xhr.status);
+            console.log(xhr);
+        }
+
+    })
+}
+
+function annuler() {
+    $("#modifLieu").css("display", "none");
+    $("#infoLieu").css("display", "block");
+}
+
+function supprimer() {
+    var href = window.location.href
+
+    $.ajax({
+        type: 'POST',
+        url: href,
+        data: {type: "delete", id: lieu.id},
+        timeout: 5000,
+        success: () => {
+            window.location = href;
+        },
+        error: (xhr) => {
+            console.log("status = " + xhr.status);
+            console.log(xhr);
+        }
+    })
 }
 
 $(document).ready(function () {

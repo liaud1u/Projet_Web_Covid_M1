@@ -137,14 +137,32 @@
     </div>
 </section>
 <section id="register" class="parallax-section" >
-    <div class="container" id="infoLieu">
-        <div class="wow fadeInUp col-md-12 col-sm-12"  id="lieu" style="display: none;" >
+    <div class="container" id="infoLieu" style="display: none">
+        <div class="wow fadeInUp col-md-12 col-sm-12"  id="lieu" >
         </div>
 
-        <div class="col-lg-10" id="activites" style="display: none;">
+        <div class="col-lg-10" id="activites" >
             <h4>Liste d'activite : </h4>
             <ol class="" id="listActivite">
             </ol>
+        </div>
+
+    </div>
+
+    <div class="container" id="modifLieu" style="display: none">
+        <div class="wow fadeInUp col-md-12 col-sm-12" data-wow-delay="1s">
+            <div id="alert">
+
+            </div>
+            <form>
+                <input name="nom" type="text" class="form-control" id="nomForm" placeholder="Nom" required>
+                <input name="adresse" type="text" class="form-control" id="adresseForm" placeholder="Adresse"  required>
+            </form>
+            <div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
+                <input name="submit" type="submit" class="form-control" id="submit" onclick="modifier()" value="Modifier">
+                <a class="btn btn-lg btn-danger smoothScroll wow fadeInUp" onclick="annuler()" id="annuler">Annuler</a>
+                <a class="btn btn-lg btn-danger smoothScroll wow fadeInUp" onclick="supprimer()" id="suppr">Supprimer</a>
+            </div>
         </div>
 
     </div>
