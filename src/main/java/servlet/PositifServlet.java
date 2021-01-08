@@ -54,12 +54,11 @@ public class PositifServlet extends HttpServlet {
 
                 ArrayList<Activitie> activitiesFromLieu = connector.getActivitiesByLieu(String.valueOf(lieu.getId()));
 
-                System.out.println(activitiesFromLieu);
+
 
                 for(Activitie a : activitiesFromLieu){
                     Creneau creneau = new Creneau(activitie.getDebutActivitee(),activitie.getFinActivitee(),a.getDebutActivitee(),a.getFinActivitee());
 
-                    System.out.println(creneau.intersect());
 
                     if(creneau.intersect()){
                         toNotify.add(a.getUser());
@@ -71,7 +70,7 @@ public class PositifServlet extends HttpServlet {
         toNotify.remove(user);
 
         for(User u : toNotify){
-            System.out.println(u);
+
             Notification notification = new Notification( "Vous êtes cas contact ! Vous devriez vous faire tester dans un centre de test Covid19.",login,u.getLogin(),false);
             notification.create();
         }

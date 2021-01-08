@@ -391,21 +391,7 @@ public class SQLConnector {
 	public ArrayList<Activitie> getActivitiesByLieu(String idLieu) {
 			ArrayList<Activitie> activities = new ArrayList<>();
 			String rqString = "Select * from activite where idLieu='"+idLieu+"';";
-			ResultSet res = doRequest(rqString);
-			try {
-				while (res.next()) {
-					Activitie activitie = new Activitie();
-					activitie.setId(res.getInt("idActivite"));
-					activitie.setDebutActivitee(res.getTimestamp("dateDebut").toLocalDateTime());
-					activitie.setFinActivitee(res.getTimestamp("dateFin").toLocalDateTime());
-					activitie.setUser(getUserSimplify(res.getString("login")));
-					activities.add(activitie);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			return activities;
+		return getActivities(activities, rqString);
 	}
 
 		public  ResultSet doRequest(String sql_string) {
@@ -533,5 +519,23 @@ public class SQLConnector {
 		}
 
 		return lieu;
+	}
+
+	private ArrayList<Activitie> getActivities(ArrayList<Activitie> activities, String rqString) {
+		ResultSet res = doRequest(rqString);
+		try {
+			while (res.next()) {
+				Activitie activitie = new Activitie();
+				activitie.setId(res.getInt("idActivite"));
+				activitie.setDebutActivitee(res.getTimestamp("dateDebut").toLocalDateTime());
+				activitie.setFinActivitee(res.getTimestamp("dateFin").toLocalDateTime());
+				activitie.setUser(getUserSimplify(res.getString("login")));
+				activities.add(activitie);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return activities;
 	}
 }

@@ -38,6 +38,5 @@ public class SelectionLieuServlet extends HttpServlet {
 
         User user = (User) request.getSession().getAttribute("user");
         user.addActivite(activitie);
-
     }
 }

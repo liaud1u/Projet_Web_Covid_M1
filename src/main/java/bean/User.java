@@ -149,6 +149,6 @@ public class User implements Serializable {
     }
 
     public void addActivite(Activitie activitie) {
-        activities.add(activitie);
+        activities.add(0,activitie);
     }
 }

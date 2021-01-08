@@ -1,5 +1,8 @@
 <%@ page import="bean.User" %>
 <%@ page import="bean.Activitie" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Collections" %>
+<%@ page import="java.util.Comparator" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="fr">
@@ -127,7 +130,10 @@
     <h1>Votre Historique d'activités</h1>
     <%
 
-        for(Activitie activitie : ((User)session.getAttribute("user")).getActivities()) { %>
+        ArrayList<Activitie> activities = ((User)session.getAttribute("user")).getActivities();
+
+
+        for(Activitie activitie :activities ) { %>
     <div  class="flex-container-item speakers-wrapper">
 
         <div class="speakers-thumb wow " data-wow-delay="1s">
