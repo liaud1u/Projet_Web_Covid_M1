@@ -72,7 +72,7 @@
                 <% if (user1 != null) { %>
                 <li><a href="Activites" class="smoothScroll">Activitées</a></li>
                 <li><a href="Profil" class="smoothScroll">Profil</a></li>
-                <% if (user.isAdmin()) { %>
+                <% if (user1.isAdmin()) { %>
                 <li><a href="Admin" class="smoothScroll">Admin</a></li>
 
                 <% } %>
